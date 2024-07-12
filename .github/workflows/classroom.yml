@@ -33,6 +33,7 @@ jobs:
 
       - name: Run script
         run: |
+          ls -al
           . $(werf ci-env github --as-file)
           env
 #        env:
