@@ -28,6 +28,9 @@ jobs:
       - name: Install werf
         uses: werf/actions/install@v1.2
 
+      - name: Install git
+        run: sudo apt update && sudo apt install git
+
       - name: Run script
         run: |
           . $(werf ci-env github --as-file)
