@@ -7,7 +7,7 @@ on:
   pull_request:
     branches:
       - master
-  workflow_dispatch:
+#  workflow_dispatch:
 
 jobs:
   Explore-GitHub-Actions:
@@ -15,3 +15,23 @@ jobs:
     runs-on: arc-runner-set
     steps:
       - run: echo "🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉 This job uses runner scale set runners!"
+
+  converge:
+    name: Converge
+    runs-on: arc-runner-set
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Install werf
+        uses: werf/actions/install@v1.2
+
+      - name: Run script
+        run: |
+          . $(werf ci-env github --as-file)
+          env
+#        env:
+#          WERF_KUBECONFIG_BASE64: ${{ secrets.KUBE_CONFIG_BASE64_DATA }}
+#          WERF_ENV: production
