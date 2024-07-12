@@ -1,0 +1,91 @@
+version: "3"
+services:
+  hotel-db:
+    build:
+      context: hotel-db
+    restart: unless-stopped
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+    volumes:
+      - hotel-db:/var/lib/postgresql
+
+  reservation-service:
+    build:
+      context: backend
+      args:
+        PROJECT: reservation-service
+    restart: unless-stopped
+    ports:
+      - 8070:8080
+    environment:
+      SPRING_DATASOURCE_URL: "jdbc:postgresql://hotel-db:5432/reservation"
+      SERVER_PORT: 8080
+    depends_on:
+      - hotel-db
+
+  payment-service:
+    build:
+      context: backend
+      args:
+        PROJECT: payment-service
+    restart: unless-stopped
+    ports:
+      - 8060:8080
+    environment:
+      SPRING_DATASOURCE_URL: "jdbc:postgresql://hotel-db:5432/payment"
+      SERVER_PORT: 8080
+    depends_on:
+      - hotel-db
+
+  loyalty-service:
+    build:
+      context: backend
+      args:
+        PROJECT: loyalty-service
+    restart: unless-stopped
+    ports:
+      - 8050:8080
+    environment:
+      SPRING_DATASOURCE_URL: "jdbc:postgresql://hotel-db:5432/loyalty"
+      SERVER_PORT: 8080
+    depends_on:
+      - hotel-db
+
+  gateway-service:
+    build:
+      context: backend
+      args:
+        PROJECT: gateway-service
+    restart: unless-stopped
+    ports:
+      - 8080:8080
+    environment:
+      APP_INTEROP_RESERVATION-CLIENT-API: "http://reservation-service:8080/"
+      APP_INTEROP_PAYMENT-CLIENT-API: "http://payment-service:8080/"
+      APP_INTEROP_LOYALTY-CLIENT-API: "http://loyalty-service:8080/"
+      BNUUY_HOST: bnuuy
+    depends_on:
+      - reservation-service
+      - payment-service
+      - loyalty-service
+      - bnuuy
+
+  bnuuy:
+    image: rabbitmq:3.12-management-alpine
+    environment:
+      RABBITMQ_DEFAULT_USER: user
+      RABBITMQ_DEFAULT_PASS: password
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    volumes:
+      - ./bnuuy-mq/rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
+      - ./bnuuy-mq/definitions.json:/etc/rabbitmq/definitions.json
+
+
+volumes:
+  hotel-db:

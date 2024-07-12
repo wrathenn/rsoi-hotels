@@ -1,0 +1,40 @@
+app:
+  interop:
+    reservation-client-api: http://localhost:8070/
+    payment-client-api: http://localhost:8060/
+    loyalty-client-api: http://localhost:8050/
+spring:
+  cloud:
+    openfeign:
+      circuitbreaker:
+        group:
+          enabled: true
+        enabled: true
+        alphanumeric-ids:
+          enabled: true
+
+resilience4j:
+  timelimiter:
+    instances:
+      LoyaltyClient:
+        timeout-duration: 10s
+  circuitbreaker:
+    instances:
+      LoyaltyClient:
+        minimumNumberOfCalls: 10
+
+  retry:
+    instances:
+      LoyaltyClient:
+        retryExceptions:
+          - java.lang.Throwable
+        max-attempts: 10
+        wait-duration: 1s
+
+bnuuy:
+  host: localhost
+  port: 5672
+  queues:
+    requests: "requests"
+  exchanges:
+    requests: "requests"

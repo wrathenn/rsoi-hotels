@@ -1,0 +1,9 @@
+server:
+  port: 8070
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/reservation
+    username: backend
+    password: backend
+    driver-class-name: org.postgresql.Driver
