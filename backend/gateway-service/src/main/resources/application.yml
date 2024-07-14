@@ -31,10 +31,10 @@ resilience4j:
         max-attempts: 10
         wait-duration: 1s
 
-bnuuy:
-  host: localhost
-  port: 5672
-  queues:
-    requests: "requests"
-  exchanges:
-    requests: "requests"
+kafka:
+  bootstrap-servers: localhost:5672
+  sasl:
+    enabled: true
+    username: user
+    password: password
+  topic: "requests"
