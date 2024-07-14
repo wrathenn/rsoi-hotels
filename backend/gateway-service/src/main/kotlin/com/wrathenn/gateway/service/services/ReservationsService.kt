@@ -1,13 +1,13 @@
 package com.wrathenn.gateway.service.services
 
-import com.wrathenn.gateway.service.bnuuy.RequestsSender
+import com.wrathenn.gateway.service.kafka.RequestsSender
 import com.wrathenn.gateway.service.clients.LoyaltyClient
 import com.wrathenn.gateway.service.clients.PaymentClient
 import com.wrathenn.gateway.service.clients.ReservationClient
 import com.wrathenn.gateway.service.models.PaymentDto
 import com.wrathenn.gateway.service.models.ReservationDto
 import com.wrathenn.gateway.service.models.ReservationInfoDto
-import com.wrathenn.gateway.service.models.bnuuy.BnuuyRequest
+import com.wrathenn.gateway.service.models.bnuuy.KafkaRequest
 import com.wrathenn.util.models.loyalty.LoyaltyReservationCountOperation
 import com.wrathenn.util.models.payment.PaymentCreate
 import com.wrathenn.util.models.reservation.ReservationCreate
@@ -90,7 +90,7 @@ class ReservationsService(
 
         // Уменьшить счетчик бронирований
         loyaltyClient.updateReservationCountWithRetry(username, LoyaltyReservationCountOperation.DECREMENT) {
-            requestsSender.sendRequest(BnuuyRequest.LoyaltyUpdateReservationCountRequest(
+            requestsSender.sendRequest(KafkaRequest.LoyaltyUpdateReservationCountRequest(
                 username,
                 LoyaltyReservationCountOperation.DECREMENT,
             ))

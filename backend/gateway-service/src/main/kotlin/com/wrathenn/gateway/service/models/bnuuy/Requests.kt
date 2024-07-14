@@ -11,9 +11,9 @@ import com.wrathenn.util.models.loyalty.LoyaltyReservationCountOperation
     visible = true
 )
 @JsonSubTypes(
-    JsonSubTypes.Type(value = BnuuyRequest.LoyaltyUpdateReservationCountRequest::class, name = "LOYALTY_UPDATE_COUNT"),
+    JsonSubTypes.Type(value = KafkaRequest.LoyaltyUpdateReservationCountRequest::class, name = "LOYALTY_UPDATE_COUNT"),
 )
-sealed class BnuuyRequest(
+sealed class KafkaRequest(
     val type: RequestType
 ) {
     enum class RequestType {
@@ -23,7 +23,7 @@ sealed class BnuuyRequest(
     data class LoyaltyUpdateReservationCountRequest(
         val username: String,
         val loyaltyReservationCountOperation: LoyaltyReservationCountOperation,
-    ) : BnuuyRequest(RequestType.LOYALTY_UPDATE_COUNT)
+    ) : KafkaRequest(RequestType.LOYALTY_UPDATE_COUNT)
 }
 
 

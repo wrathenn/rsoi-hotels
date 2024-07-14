@@ -31,7 +31,7 @@ dependencies {
     implementation("org.springframework.cloud:spring-cloud-starter-openfeign")
     implementation("org.springframework.cloud:spring-cloud-circuitbreaker-resilience4j:3.1.0")
 
-    implementation("org.springframework.amqp:spring-rabbit")
+    implementation("org.springframework.kafka:spring-kafka")
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.mockito:mockito-core")
