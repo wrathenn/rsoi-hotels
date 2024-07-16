@@ -19,6 +19,11 @@ jobs:
   converge:
     name: Converge
     runs-on: arc-runner-set
+
+    permissions:
+      contents: read
+      packages: write
+
     steps:
       - name: Install git
         run: sudo apt update && sudo apt install git -y
@@ -40,6 +45,7 @@ jobs:
           . $(werf ci-env github --as-file)
           env
           werf converge
+
 #        env:
 #          WERF_KUBECONFIG_BASE64: ${{ secrets.KUBE_CONFIG_BASE64_DATA }}
 #          WERF_ENV: production
