@@ -36,8 +36,8 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Buildah Build
-        uses: redhat-actions/buildah-build@v2
+#      - name: Buildah Build
+#        uses: redhat-actions/buildah-build@v2
 
       - name: Install werf
         uses: werf/actions/install@v1.2
