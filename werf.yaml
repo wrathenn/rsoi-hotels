@@ -1,0 +1,7 @@
+project: rsoi-hotels
+configVersion: 1
+---
+{{- range $path, $content := .Files.Glob "**/werf-partial.yaml" }}
+---
+{{ tpl $content $ }}
+{{- end }}

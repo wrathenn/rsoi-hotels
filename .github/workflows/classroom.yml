@@ -36,6 +36,7 @@ jobs:
           ls -al
           . $(werf ci-env github --as-file)
           env
+          werf converge
 #        env:
 #          WERF_KUBECONFIG_BASE64: ${{ secrets.KUBE_CONFIG_BASE64_DATA }}
 #          WERF_ENV: production
