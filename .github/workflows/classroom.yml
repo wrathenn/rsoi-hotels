@@ -30,7 +30,6 @@ jobs:
           sudo apt update -y
           sudo apt install git -y
           sudo apt install buildah -y
-          export WERF_BUILDAH_MODE=auto
 
       - name: Checkout code
         uses: actions/checkout@v3
@@ -51,6 +50,7 @@ jobs:
           ls -al
           . $(werf ci-env github --as-file)
           env
+          export WERF_BUILDAH_MODE=auto
           werf converge
 
 #        env:
