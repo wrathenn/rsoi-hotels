@@ -51,7 +51,7 @@ docker:
     - -XX:+CrashOnOutOfMemoryError
     - -XX:+HeapDumpOnOutOfMemoryError
     - -Xmx3g
-    - /app/geo-service.jar
+    - /app/loyalty-service.jar
 ---
 image: payment
 from: docker.io/library/eclipse-temurin:17-jre-jammy
@@ -78,7 +78,7 @@ docker:
     - -XX:+CrashOnOutOfMemoryError
     - -XX:+HeapDumpOnOutOfMemoryError
     - -Xmx3g
-    - /app/geo-service.jar
+    - /app/payment-service.jar
 ---
 image: reservation
 from: docker.io/library/eclipse-temurin:17-jre-jammy
@@ -105,7 +105,7 @@ docker:
     - -XX:+CrashOnOutOfMemoryError
     - -XX:+HeapDumpOnOutOfMemoryError
     - -Xmx3g
-    - /app/geo-service.jar
+    - /app/reservation-service.jar
 ---
 image: gateway
 from: docker.io/library/eclipse-temurin:17-jre-jammy
@@ -132,4 +132,4 @@ docker:
     - -XX:+CrashOnOutOfMemoryError
     - -XX:+HeapDumpOnOutOfMemoryError
     - -Xmx3g
-    - /app/geo-service.jar
+    - /app/gateway-service.jar
