@@ -51,6 +51,7 @@ jobs:
           . $(werf ci-env github --as-file)
           env
           export WERF_BUILDAH_MODE=auto
+          pwd
           werf converge
 
 #        env:
