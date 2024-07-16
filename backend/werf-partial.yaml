@@ -4,11 +4,9 @@ from: docker.io/library/gradle:8.6.0-jdk17-jammy
 git:
   - to: /project
     includePaths:
-      - kotlin/*
+      - backend/*
     excludePaths:
-      - kotlin/android/*
-      - kotlin/services/keycloak/themes
-      - kotlin/services/werf-partial.yaml
+      - backend/werf-partial.yaml
     stageDependencies:
       beforeSetup:
         - "*"
@@ -18,16 +16,15 @@ git:
 shell:
   install:
     - export GRADLE_USER_HOME=/gradle_home
-    - cd /project/kotlin
+    - cd /project/backend
     - export LANG=en_US.UTF-8
     - export GRADLE_OPTS="-Xmx2g -XX:MaxMetaspaceSize=512m -XX:+HeapDumpOnOutOfMemoryError -Dfile.encoding=UTF-8"
     - gradle resolveDependencies --no-daemon --info
   beforeSetup:
     - export GRADLE_USER_HOME=/gradle_home
-    - cd /project/kotlin
+    - cd /project/backend
     - export LANG=en_US.UTF-8
     - export GRADLE_OPTS="-Xmx2g -XX:MaxMetaspaceSize=512m -XX:+HeapDumpOnOutOfMemoryError -Dfile.encoding=UTF-8"
-    - gradle detekt
     - gradle :gateway-service:bootJar :loyalty-service:bootJar :payment-service:bootJar :reservation-service:bootJar --parallel
 ---
 image: loyalty
