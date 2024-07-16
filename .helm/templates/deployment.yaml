@@ -20,7 +20,7 @@ spec:
         fsGroup: 2000
       containers:
       - name: payment
-        image: {{ .Values.payment }}
+        image: {{ .Values.werf.image.payment }}
         env:
           - name: app.debug-mode
             value: "{{ .Values.payment.debug }}"
