@@ -1,0 +1,31 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: hoteldb
+  labels:
+    app.kubernetes.io/name: hoteldb
+  annotations:
+    werf.io/weight: "-50"
+spec:
+  inheritedMetadata:
+    labels:
+      app.kubernetes.io/name: hoteldb
+  imageName: {{ .Values.werf.image.hoteldb }}
+  instances: {{ .Values.hoteldb.instances }}
+  primaryUpdateMethod: switchover
+  enableSuperuserAccess: true
+  bootstrap:
+    initdb:
+      localeCollate: en_US.UTF-8
+      localeCType: en_US.UTF-8
+  storage:
+    storageClass: "{{ .Values.hoteldb.storage.class }}"
+    size: "{{ .Values.hoteldb.storage.size }}"
+  resources:
+    {{- .Values.hoteldb.resources | toYaml | nindent 4 }}
+  postgresql:
+    parameters:
+      {{- .Values.hoteldb.parameters | toYaml | nindent 6 }}
+  env:
+    - name: TMPDIR
+      value: /run # cnpg doesn't mount a writable /tmp, plsh needs it

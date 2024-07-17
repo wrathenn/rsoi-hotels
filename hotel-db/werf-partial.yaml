@@ -1,0 +1,7 @@
+image: hotel-db
+fromImage: ghcr.io/cloudnative-pg/postgresql:latest
+git:
+  - add: /init
+    to: /docker-entrypoint-initdb.d
+    excludePaths:
+      - werf-partial.yaml

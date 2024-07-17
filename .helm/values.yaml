@@ -49,3 +49,18 @@ gateway:
       memory: 4Gi
   nodeSelector: {}
   tolerations: []
+
+hoteldb:
+  instances: 1
+  storage:
+    class: ceph-rbd-sc
+    size: 4Gi
+  resources:
+    requests:
+      cpu: 25m
+      memory: 128Mi
+    limits:
+      memory: 4096Mi
+  parameters:
+    max_connections: "100"
+    max_prepared_transactions: "100"
