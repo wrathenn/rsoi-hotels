@@ -1,6 +1,3 @@
-server:
-  port: 8070
-
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/reservation
