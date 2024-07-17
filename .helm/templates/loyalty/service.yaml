@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: loyalty
+  labels:
+    app.kubernetes.io/name: loyalty
+spec:
+  selector:
+    app.kubernetes.io/name: loyalty
+  ports:
+    - port: 80
+      name: http
+      targetPort: http

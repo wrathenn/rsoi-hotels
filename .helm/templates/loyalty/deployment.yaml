@@ -1,0 +1,65 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: loyalty
+  labels:
+    app.kubernetes.io/name: loyalty
+spec:
+  replicas: {{ .Values.loyalty.replicas }}
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: loyalty
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: loyalty
+    spec:
+      securityContext:
+        fsGroup: 2000
+      containers:
+      - name: loyalty
+        image: {{ .Values.werf.image.loyalty }}
+        env:
+          - name: app.debug-mode
+            value: "{{ .Values.loyalty.debug }}"
+        ports:
+          - name: http
+            containerPort: 8080
+        livenessProbe:
+          httpGet:
+            port: http
+            path: /manage/health
+          periodSeconds: 5
+          failureThreshold: 6
+          initialDelaySeconds: 2
+        readinessProbe:
+          httpGet:
+            port: http
+            path: /manage/health
+          periodSeconds: 5
+          initialDelaySeconds: 2
+        startupProbe:
+          httpGet:
+            port: http
+            path: /manage/health
+          periodSeconds: 2
+          failureThreshold: 30
+          initialDelaySeconds: 2
+        resources:
+          {{- toYaml .Values.loyalty.resources | nindent 12 }}
+        volumeMounts:
+          - mountPath: /workdir
+            name: workdir
+      volumes:
+        - name: workdir
+          emptyDir: {}
+      {{- with .Values.loyalty.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.loyalty.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
