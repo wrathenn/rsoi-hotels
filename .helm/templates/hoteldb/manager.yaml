@@ -19,6 +19,12 @@ spec:
             - name: PGHOST
               value: hoteldb-rw
             - name: PGUSER
-              value: postgres
+              valueFrom:
+                secretKeyRef:
+                  name: hoteldb-superuser
+                  key: username
             - name: PGPASSWORD
-              value: postgres
+              valueFrom:
+                secretKeyRef:
+                  name: hoteldb-superuser
+                  key: password
