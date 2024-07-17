@@ -1,7 +1,7 @@
 image: hotel-db
 from: ghcr.io/cloudnative-pg/postgresql:16.3
-git:
-  - add: /hotel-db/init
-    to: /docker-entrypoint-initdb.d
-    excludePaths:
-      - werf-partial.yaml
+#git:
+#  - add: /hotel-db/init
+#    to: /docker-entrypoint-initdb.d
+#    excludePaths:
+#      - werf-partial.yaml
