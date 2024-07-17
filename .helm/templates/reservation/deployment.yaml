@@ -24,6 +24,12 @@ spec:
         env:
           - name: app.debug-mode
             value: "{{ .Values.reservation.debug }}"
+          - name: spring.datasource.url
+            value: jdbc:postgresql://hoteldb-rw:5432/reservation
+          - name: spring.datasource.username
+            value: backend
+          - name: spring.datasource.password
+            value: backend
         ports:
           - name: http
             containerPort: 8080
