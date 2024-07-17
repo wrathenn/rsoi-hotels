@@ -53,7 +53,7 @@ gateway:
 hoteldb:
   instances: 1
   storage:
-    class: rbd.csi.ceph.com
+    class: csi-rbd-sc
     size: 4Gi
   resources:
     requests:
