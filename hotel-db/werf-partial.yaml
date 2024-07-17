@@ -1,9 +1,11 @@
-image: hotel-db
+image: hoteldbManager
 from: ghcr.io/cloudnative-pg/postgresql:16.3
 git:
   - add: /hotel-db/init
-    to: /docker-entrypoint-initdb.d
-    excludePaths:
-      - werf-partial.yaml
-  - add: /hotel-db/init
+    to: /init
+  - add: /hotel-db/manage.sh
     to: /
+docker:
+  WORKDIR: "/"
+  ENTRYPOINT: ["bash", "/manage.sh"]
+  USER: "2000:2000"

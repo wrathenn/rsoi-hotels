@@ -1,0 +1,24 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: hoteldb-manager
+  labels:
+    app.kubernetes.io/name: hoteldb
+  annotations:
+    werf.io/weight: "-50"
+spec:
+  template:
+    spec:
+      restartPolicy: OnFailure
+      securityContext:
+        fsGroup: 2000
+      containers:
+        - name: manager
+          image: {{ .Values.werf.image.hoteldbManager }}
+          env:
+            - name: PGHOST
+              value: hoteldb-rw
+            - name: PGUSER
+              value: postgres
+            - name: PGPASSWORD
+              value: postgres
