@@ -1,5 +1,5 @@
 image: hotel-db
-fromImage: ghcr.io/cloudnative-pg/postgresql:15.7
+fromImage: ghcr.io/cloudnative-pg/postgresql:15
 git:
   - add: /init
     to: /docker-entrypoint-initdb.d
