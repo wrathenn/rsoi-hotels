@@ -80,6 +80,8 @@ keycloakdb:
     max_connections: "100"
     max_prepared_transactions: "100"
 
+secure: false
+
 keycloak:
   enabled: true
   resources:
