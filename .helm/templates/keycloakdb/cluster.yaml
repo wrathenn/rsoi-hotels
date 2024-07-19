@@ -1,0 +1,27 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: keycloakdb
+  labels:
+    app.kubernetes.io/name: keycloakdb
+  annotations:
+    werf.io/weight: "-50"
+spec:
+  inheritedMetadata:
+    labels:
+      app.kubernetes.io/name: keycloakdb
+  imageName: ghcr.io/cloudnative-pg/postgresql:16.3
+  instances: {{ .Values.keycloakdb.instances }}
+  primaryUpdateMethod: switchover
+  bootstrap:
+    initdb:
+      localeCollate: en_US.UTF-8
+      localeCType: en_US.UTF-8
+  storage:
+    storageClass: "{{ .Values.keycloakdb.storage.class }}"
+    size: "{{ .Values.keycloakdb.storage.size }}"
+  resources:
+    {{- .Values.keycloakdb.resources | toYaml | nindent 4 }}
+  postgresql:
+    parameters:
+      {{- .Values.keycloakdb.parameters | toYaml | nindent 6 }}

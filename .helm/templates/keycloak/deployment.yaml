@@ -1,0 +1,85 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: keycloak
+  labels:
+    app.kubernetes.io/name: keycloak
+  annotations:
+    werf.io/weight: "-10"
+    werf.io/failures-allowed-per-replica: "4"
+    service.external-dependency.werf.io/resource: service/keycloakdb-rw
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: keycloak
+    spec:
+      containers:
+      - name: keycloak
+        image: {{ .Values.werf.image.keycloak }}
+        args:
+          - start
+          - --optimized
+          - --http-enabled=true
+          - --proxy-headers=xforwarded
+          - --import-realm
+        env:
+          - name: KC_HOSTNAME
+            value: localhost
+          - name: KC_HOSTNAME_STRICT
+            value: "false"
+          - name: KC_DB_URL
+            value: jdbc:postgresql://keycloakdb-rw:5432/app
+          - name: KEYCLOAK_ADMIN
+            valueFrom:
+              secretKeyRef:
+                name: keycloak-admin
+                key: username
+          - name: KEYCLOAK_ADMIN_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: keycloak-admin
+                key: password
+          - name: KC_DB_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: keycloakdb-app
+                key: username
+          - name: KC_DB_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: keycloakdb-app
+                key: password
+        ports:
+          - name: http
+            containerPort: 8080
+          - name: management
+            containerPort: 9000
+        livenessProbe:
+          httpGet:
+            path: /keycloak/health/live
+            port: management
+          periodSeconds: 5
+          failureThreshold: 6
+        readinessProbe:
+          httpGet:
+            path: /keycloak/health/ready
+            port: management
+          periodSeconds: 5
+        startupProbe:
+          httpGet:
+            path: /keycloak/health/ready
+            port: management
+          initialDelaySeconds: 15
+          periodSeconds: 2
+        volumeMounts:
+          - name: tmp
+            mountPath: /tmp
+        resources:
+          {{- toYaml .Values.keycloak.resources | nindent 12 }}
+      volumes:
+        - name: tmp
+          emptyDir: {}

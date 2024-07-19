@@ -64,3 +64,27 @@ hoteldb:
   parameters:
     max_connections: "100"
     max_prepared_transactions: "100"
+
+keycloakdb:
+  instances: 1
+  storage:
+    class: csi-rbd-sc
+    size: 2Gi
+  resources:
+    requests:
+      cpu: 25m
+      memory: 128Mi
+    limits:
+      memory: 4096Mi
+  parameters:
+    max_connections: "100"
+    max_prepared_transactions: "100"
+
+keycloak:
+  enabled: true
+  resources:
+    requests:
+      cpu: 1m
+      memory: 376Mi
+    limits:
+      memory: 4Gi

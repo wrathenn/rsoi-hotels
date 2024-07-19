@@ -1,0 +1,17 @@
+{{ $name := "keycloak-admin" -}}
+{{ $existingSecret := lookup "v1" "Secret" .Release.Namespace $name -}}
+apiVersion: v1
+kind: Secret
+type: kubernetes.io/basic-auth
+metadata:
+  name: {{ $name }}
+  annotations:
+    werf.io/weight: "-40"
+{{ if $existingSecret -}}
+data:
+  {{- $existingSecret.data | toYaml | nindent 2 }}
+{{ else -}}
+stringData:
+  username: admin
+  password: {{ .Values.secure | ternary (randAlphaNum 64) "admin" }}
+{{ end -}}
