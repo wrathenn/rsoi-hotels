@@ -13,3 +13,6 @@ spec:
     - port: 80
       targetPort: http
       name: http
+    - port: 90
+      targetPort: management
+      name: management
