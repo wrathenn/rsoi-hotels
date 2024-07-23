@@ -7,7 +7,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-    - host: hotels.rsoi
+    - host: hotels.rsoi.wrathen.ru
       http:
         paths:
           - path: /auth
