@@ -31,7 +31,7 @@ spec:
           - --import-realm
         env:
           - name: KC_HOSTNAME
-            value: localhost
+            value: hotels.rsoi.wrathen.ru
           - name: KC_HOSTNAME_STRICT
             value: "false"
           - name: KC_DB_URL
