@@ -32,9 +32,9 @@ resilience4j:
         wait-duration: 1s
 
 kafka:
-  bootstrap-servers: localhost:5672
+  bootstrap-servers: kafka-kafka-bootstrap:9092
   sasl:
-    enabled: true
+    enabled: false
     username: user
     password: password
   topic: "requests"
