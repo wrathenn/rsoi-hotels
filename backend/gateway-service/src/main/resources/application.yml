@@ -32,6 +32,7 @@ resilience4j:
         wait-duration: 1s
 
 kafka:
+  group-id: gateway
   bootstrap-servers: kafka-kafka-bootstrap:9092
   sasl:
     enabled: false

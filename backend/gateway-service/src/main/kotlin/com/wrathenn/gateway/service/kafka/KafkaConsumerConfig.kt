@@ -29,11 +29,13 @@ class KafkaConsumerConfig {
     fun consumerFactory(
         @Value("\${kafka.bootstrap-servers}") bootstrapServers: String,
         @Value("\${kafka.sasl.enabled}") saslEnabled: Boolean,
-        @Value("\${kafka.sasl.username}") username: String?,
-        @Value("\${kafka.sasl.password}") password: String?,
+        @Value("\${kafka.sasl.username}") username: String,
+        @Value("\${kafka.sasl.password}") password: String,
+        @Value("\${kafka.group-id}") groupId: String,
     ): ConsumerFactory<Any, Any> {
         val config = mutableMapOf<String, Any>()
         config[ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG] = bootstrapServers
+        config[ConsumerConfig.GROUP_ID_CONFIG] = groupId
         config[ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG] = StringDeserializer::class.java
         config[ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG] = ErrorHandlingDeserializer::class.java
         config[ErrorHandlingDeserializer.VALUE_DESERIALIZER_CLASS] = JsonDeserializer::class.java
