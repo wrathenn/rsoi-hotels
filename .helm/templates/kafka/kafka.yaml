@@ -32,7 +32,7 @@ spec:
     resources: {}
     storage:
       class: "{{ .Values.hoteldb.storage.class }}"
-      deleteClaim: false
+      deleteClaim: true
       size: "4Gi"
       type: persistent-claim
   zookeeper:
@@ -46,6 +46,6 @@ spec:
     resources: {}
     storage:
       class: "{{ .Values.hoteldb.storage.class }}"
-      deleteClaim: false
+      deleteClaim: true
       size: "1Gi"
       type: persistent-claim
