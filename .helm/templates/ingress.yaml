@@ -17,3 +17,10 @@ spec:
                 name: keycloak
                 port:
                   name: http
+          - path: /api/gateway
+            pathType: Prefix
+            backend:
+              service:
+                name: gateway
+                port:
+                  name: http

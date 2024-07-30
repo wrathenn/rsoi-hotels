@@ -1,5 +1,6 @@
 ---
-artifact: jars
+image: jars
+final: false
 from: docker.io/library/gradle:8.6.0-jdk17-jammy
 git:
   - to: /project
@@ -29,7 +30,7 @@ shell:
 image: loyalty
 from: docker.io/library/eclipse-temurin:17-jre-jammy
 import:
-  - artifact: jars
+  - image: jars
     after: install
     add: /project/backend/loyalty-service/build/libs/
     to: /app
@@ -56,7 +57,7 @@ docker:
 image: payment
 from: docker.io/library/eclipse-temurin:17-jre-jammy
 import:
-  - artifact: jars
+  - image: jars
     after: install
     add: /project/backend/payment-service/build/libs/
     to: /app
@@ -83,7 +84,7 @@ docker:
 image: reservation
 from: docker.io/library/eclipse-temurin:17-jre-jammy
 import:
-  - artifact: jars
+  - image: jars
     after: install
     add: /project/backend/reservation-service/build/libs/
     to: /app
@@ -110,7 +111,7 @@ docker:
 image: gateway
 from: docker.io/library/eclipse-temurin:17-jre-jammy
 import:
-  - artifact: jars
+  - image: jars
     after: install
     add: /project/backend/gateway-service/build/libs/
     to: /app
