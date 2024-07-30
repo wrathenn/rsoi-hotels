@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component
 
 @Component
 class RequestsSender(
-    private val kafkaTemplate: KafkaTemplate<String, KafkaRequest>,
+    private val kafkaTemplate: KafkaTemplate<String, Any>,
     @Value("\${kafka.topic}") private val topicName: String,
 ) {
     private val logger = LoggerFactory.getLogger(this::class.java)
