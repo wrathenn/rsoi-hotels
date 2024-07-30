@@ -17,7 +17,7 @@ import org.springframework.kafka.support.serializer.JsonSerializer
 class KafkaProducerConfig {
     private val logger = LoggerFactory.getLogger(this::class.java)
 
-//    @Bean
+    @Bean
     fun producerFactory(
         @Value("\${kafka.bootstrap-servers}") bootstrapServers: String,
         @Value("\${kafka.sasl.enabled}") saslEnabled: Boolean,
@@ -38,7 +38,7 @@ class KafkaProducerConfig {
         return DefaultKafkaProducerFactory(config)
     }
 
-//    @Bean
+    @Bean
     fun kafkaTemplate(producerFactory: ProducerFactory<String, Any>): KafkaTemplate<String, Any> {
         return KafkaTemplate(producerFactory)
     }
