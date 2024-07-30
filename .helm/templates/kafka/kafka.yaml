@@ -49,3 +49,13 @@ spec:
       deleteClaim: true
       size: "1Gi"
       type: persistent-claim
+  entityOperator:
+    topicOperator:
+      reconciliationIntervalMs: 5000
+      resources:
+        requests:
+          cpu: "1"
+          memory: 500Mi
+        limits:
+          cpu: "1"
+          memory: 500Mi
