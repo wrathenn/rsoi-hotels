@@ -16,7 +16,7 @@ class RequestsListener(
 
     @KafkaListener(
         topics = ["\${kafka.topic}"],
-        containerFactory = "kafkaListenerContainerFactory",
+        containerFactory = "listenerContainerFactory",
     )
     fun requestsListenerContainer(@Payload payload: KafkaRequest) {
         when (payload) {

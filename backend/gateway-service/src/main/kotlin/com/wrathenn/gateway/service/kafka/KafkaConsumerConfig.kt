@@ -19,7 +19,7 @@ import org.springframework.kafka.support.serializer.JsonDeserializer
 class KafkaConsumerConfig {
 
     @Bean
-    fun kafkaListenerContainerFactory(consumerFactory: ConsumerFactory<Any?, Any?>): ConcurrentKafkaListenerContainerFactory<Any, Any>? {
+    fun listenerContainerFactory(consumerFactory: ConsumerFactory<Any?, Any?>): ConcurrentKafkaListenerContainerFactory<Any, Any>? {
         val factory = ConcurrentKafkaListenerContainerFactory<Any, Any>()
         factory.consumerFactory = consumerFactory
         return factory
