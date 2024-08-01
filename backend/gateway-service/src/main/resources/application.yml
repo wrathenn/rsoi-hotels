@@ -12,6 +12,11 @@ spring:
         enabled: true
         alphanumeric-ids:
           enabled: true
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: placeholder
 
 resilience4j:
   timelimiter:

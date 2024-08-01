@@ -27,7 +27,11 @@ dependencies {
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.1.0")
     implementation("org.springframework.boot:spring-boot-starter-web")
 
-//    implementation("io.github.openfeign:feign-core:13.1")
+    implementation("org.springframework.boot:spring-boot-starter-security")
+    implementation("org.springframework.boot:spring-boot-starter-oauth2-resource-server")
+    // adds JwtDecoder bean in context
+    implementation("org.springframework.boot:spring-boot-starter-oauth2-client")
+
     implementation("org.springframework.cloud:spring-cloud-starter-openfeign")
     implementation("org.springframework.cloud:spring-cloud-circuitbreaker-resilience4j:3.1.0")
 
