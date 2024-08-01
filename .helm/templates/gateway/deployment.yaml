@@ -31,7 +31,7 @@ spec:
           - name: app.interop.loyalty-client-api
             value: http://loyalty
           - name: spring.security.oauth2.resourceserver.jwt.jwk-set-uri
-            value: keycloak
+            value: http://keycloak
         ports:
           - name: http
             containerPort: 8080
