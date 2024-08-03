@@ -1,3 +1,7 @@
+server:
+  servlet:
+    context-path: /api/gateway
+
 app:
   interop:
     reservation-client-api: http://localhost:8070/
