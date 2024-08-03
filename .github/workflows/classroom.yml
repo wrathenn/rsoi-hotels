@@ -7,7 +7,6 @@ on:
   pull_request:
     branches:
       - master
-#  workflow_dispatch:
 
 jobs:
   converge:
@@ -30,9 +29,6 @@ jobs:
         with:
           fetch-depth: 0
 
-#      - name: Buildah Build
-#        uses: redhat-actions/buildah-build@v2
-
       - name: Install werf
         uses: werf/actions/install@v1.2
 
@@ -41,13 +37,6 @@ jobs:
 
       - name: Run script
         run: |
-          ls -al
           . $(werf ci-env github --as-file)
-          env
           export WERF_BUILDAH_MODE=auto
-          pwd
           werf converge
-
-#        env:
-#          WERF_KUBECONFIG_BASE64: ${{ secrets.KUBE_CONFIG_BASE64_DATA }}
-#          WERF_ENV: production
