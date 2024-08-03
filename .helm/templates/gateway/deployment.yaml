@@ -38,20 +38,20 @@ spec:
         livenessProbe:
           httpGet:
             port: http
-            path: /manage/health
+            path: /api/gateway/manage/health
           periodSeconds: 5
           failureThreshold: 6
           initialDelaySeconds: 2
         readinessProbe:
           httpGet:
             port: http
-            path: /manage/health
+            path: /api/gateway/manage/health
           periodSeconds: 5
           initialDelaySeconds: 2
         startupProbe:
           httpGet:
             port: http
-            path: /manage/health
+            path: /api/gateway/manage/health
           periodSeconds: 2
           failureThreshold: 30
           initialDelaySeconds: 2
