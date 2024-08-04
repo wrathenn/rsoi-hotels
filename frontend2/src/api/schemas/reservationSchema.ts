@@ -24,7 +24,7 @@ export namespace ReservationSchema {
     startDate?: Temporal.PlainDate
     endDate?: Temporal.PlainDate
     status: Status
-    payment: PaymentSchema.Dto | {}
+    payment: Partial<PaymentSchema.Dto>
   }
 
   export type Request = {

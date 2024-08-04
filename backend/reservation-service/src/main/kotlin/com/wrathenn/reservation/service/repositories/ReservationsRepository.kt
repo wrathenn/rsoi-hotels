@@ -80,6 +80,7 @@ class ReservationsRepositoryImpl : ReservationsRepository {
             from reservation.reservation r
               join reservation.hotel h on (r.hotel_id = h.id)
             where username = :username
+            order by r.start_date desc
         """.trimIndent())
             .bind("username", username)
             .mapTo<ReservationWithHotelEntity>()

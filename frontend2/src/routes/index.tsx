@@ -1,6 +1,8 @@
 import { createBrowserRouter, Navigate } from 'react-router-dom'
 import { Page } from 'widgets/page.widget.tsx'
 import { HotelsPage } from "views/hotels/hotels.page.tsx";
+import { ReservationsPage } from "views/reservations/reservations.page.tsx";
+import { ProfilePage } from "views/profile/profile.page.tsx";
 export const router = createBrowserRouter([
   {
     path: '/',
@@ -14,14 +16,14 @@ export const router = createBrowserRouter([
         path: "/hotels",
         Component: HotelsPage,
       },
-      // {
-      //   path: "/reservations",
-      //   Component: TicketsPage
-      // },
-      // {
-      //   path: "/profile",
-      //   Component: BonusPage
-      // },
+      {
+        path: "/reservations",
+        Component: ReservationsPage,
+      },
+      {
+        path: "/profile",
+        Component: ProfilePage,
+      },
     ]
   }
 ])

@@ -1,36 +1,33 @@
 import { ReservationSchema } from 'api/schemas/reservationSchema.ts'
 import { observer } from 'mobx-react-lite'
 import React, { useEffect } from 'react'
-import { Navigate } from 'react-router-dom'
-import { UserStore } from 'stores/user.store.ts'
-import { TicketsVm } from 'views/tickets/tickets.vm.ts'
-import { CancelTicketModal } from 'views/tickets/widgets/cancel-ticket.modal.tsx'
-import { TicketCard } from 'views/tickets/widgets/ticket-card.widget.tsx'
+import { ReservationsVm } from "views/reservations/reservations.vm.ts";
+import { ReservationCard } from "views/reservations/widgets/reservation-card.widget.tsx";
+import { CancelReservationModal } from "views/reservations/widgets/cancel-reservation.modal.tsx";
 
 export const ReservationsPage: React.FC = observer(() => {
   useEffect(() => {
-    void TicketsVm.loadData()
+    void ReservationsVm.loadData()
   }, [])
   
   const onCancelTicketClick = (ticket: ReservationSchema.Dto) => {
-      TicketsVm.showCancelTicketModal(ticket)
+      ReservationsVm.showCancelReservationModal(ticket)
   }
 
   return (
     <div className="flex flex-col gap-10">
-      { !UserStore.isAuth && <Navigate to={"/"}/> }
       <h1>Билеты</h1>
-      { TicketsVm.tickets.length === 0 && <h2>У вас нет билетов</h2> }
+      { ReservationsVm.reservations.length === 0 && <h2>У вас нет бронирований!</h2> }
       <div className="flex flex-col gap-2 px-10">
         {
-          TicketsVm.tickets
-            .map(t => <TicketCard ticket={t} key={t.ticketUid} onCancelTicketClick={onCancelTicketClick}/>)
+            ReservationsVm.reservations
+            .map(r => <ReservationCard reservation={r} key={r.reservationUid} onCancelReservationClick={onCancelTicketClick}/>)
         }
       </div>
-      <CancelTicketModal isModalShowed={TicketsVm.isCancelTicketModalShowed}
-                      hideModal={TicketsVm.hideCancelTicketModal}
-                      ticket={TicketsVm.selectedTicket}
-                      onCancelClick={t => TicketsVm.cancelTicket(t.ticketUid)}
+      <CancelReservationModal isModalShowed={ReservationsVm.isCancelReservationModalShowed}
+                      hideModal={ReservationsVm.hideCancelReservationModal}
+                      ticket={ReservationsVm.selectedReservation}
+                      onCancelClick={t => ReservationsVm.cancelReservation(t.reservationUid)}
       />
     </div>
   )

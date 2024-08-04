@@ -11,17 +11,17 @@ export const HotelsPage: React.FC = observer(() => {
     void HotelsVm.loadData();
   }, [])
 
-  const onReserveHotelClick = (flight: HotelSchema.Dto) => {
-      HotelsVm.showReserveHotelModal(flight)
+  const onReserveHotelClick = (hotel: HotelSchema.Dto) => {
+      HotelsVm.showReserveHotelModal(hotel)
   }
 
   return (
     <div className="flex flex-col gap-10">
-      <h1>Купить билеты на рейсы</h1>
+      <h1>Забронировать отель</h1>
       <div className="flex flex-col gap-2 px-10">
         {
           HotelsVm.hotels
-            .map(f => <HotelCard hotel={f} key={f.hotelUid} onReserveHotelClick={onReserveHotelClick}/>)
+            .map(h => <HotelCard hotel={h} key={h.hotelUid} onReserveHotelClick={onReserveHotelClick}/>)
         }
       </div>
       <ReserveHotelModal isModalShowed={HotelsVm.isReserveHotelModalShowed}
