@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+input {
+    @apply outline-none border;
+}
+
+button {
+    @apply bg-white text-black hover:bg-blue-200 rounded-xl px-2 py-2;
+}
+
+h1 {
+    @apply text-3xl font-bold;
+}
+
+h2 {
+    @apply text-xl font-bold;
+}
