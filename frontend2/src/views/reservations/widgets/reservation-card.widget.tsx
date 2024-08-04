@@ -7,7 +7,7 @@ export const ReservationCard: React.FC<{
   onCancelReservationClick: (ticket: ReservationSchema.InfoDto) => void
 }> = x => {
   return (
-    <div className="flex items-center justify-between bg-[#2f2a38] text-white w-full px-4 py-2 rounded-xl" style={{ opacity: x.reservation.status === "CANCELED" ? 0.5 : 1 }}>
+    <div className="flex items-center justify-between bg-[#e39254] text-white w-full px-4 py-2 rounded-xl" style={{ opacity: x.reservation.status === "CANCELED" ? 0.5 : 1 }}>
       <div className="flex items-center gap-2">
         <div className="w-[80px]">{x.reservation.reservationUid.split("-")[0]}</div>
         <div className="w-[200px]">{x.reservation.hotel.name}</div>

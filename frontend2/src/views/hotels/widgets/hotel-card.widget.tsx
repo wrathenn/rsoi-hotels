@@ -7,7 +7,7 @@ export const HotelCard: React.FC<{
   onReserveHotelClick: (hotel: HotelSchema.Dto) => void
 }> = x => {
   return (
-    <div className="flex items-center justify-between bg-[#2f2a38] text-white w-full px-4 py-2 rounded-xl">
+    <div className="flex items-center justify-between bg-[#e39254] text-white w-full px-4 py-2 rounded-xl">
       <div className="flex items-center gap-2">
         <div className="w-[240px]">{x.hotel.name}</div>
         <div className="w-[240px]">{`${x.hotel.country}, ${x.hotel.city}`}</div>
