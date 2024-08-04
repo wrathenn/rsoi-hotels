@@ -62,7 +62,7 @@ interface ReservationClient {
 
 @Component
 class ReservationClientFallback: ReservationClient {
-    private val unavailableMessage = "Loyalty Service unavailable"
+    private val unavailableMessage = "Reservation Service unavailable"
 
     @GetMapping("/hotels")
     override fun pagedHotels(page: Int, size: Int): Page<Hotel> {

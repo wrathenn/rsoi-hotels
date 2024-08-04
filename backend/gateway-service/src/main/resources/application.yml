@@ -2,6 +2,7 @@ server:
   servlet:
     context-path: /api/gateway
 
+
 app:
   interop:
     reservation-client-api: http://localhost:8070/
@@ -48,3 +49,7 @@ kafka:
     username: user
     password: password
   topic: "requests"
+logging:
+  level:
+    org.springframework.cloud: DEBUG
+    org.springframework.web: DEBUG
