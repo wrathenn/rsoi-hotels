@@ -8,11 +8,12 @@ import org.springframework.stereotype.Component
 
 @Component
 class RsoiJwtConverter(val mapper: ObjectMapper): Converter<Jwt, RsoiAuthenticationToken> {
-
     override fun convert(jwt: Jwt): RsoiAuthenticationToken {
+        val username: String = mapper.convertValue(jwt.getClaim("email"))
+
         val principal = RsoiPrincipal(
-            role = mapper.convertValue(jwt.getClaim("role")),
-            userClaim = mapper.convertValue(jwt.getClaim("user")),
+            role = UserRole.USER,
+            userClaim = UserClaim(id = username)
         )
 
         return RsoiAuthenticationToken(
@@ -21,5 +22,4 @@ class RsoiJwtConverter(val mapper: ObjectMapper): Converter<Jwt, RsoiAuthenticat
             authorities = emptyList(),
         )
     }
-
 }

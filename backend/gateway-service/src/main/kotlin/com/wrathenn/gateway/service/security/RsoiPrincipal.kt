@@ -6,8 +6,7 @@ enum class UserRole {
 }
 
 data class UserClaim(
-    val id: Long,
-    val name: String,
+    val id: String,
 )
 
 data class RsoiPrincipal(
