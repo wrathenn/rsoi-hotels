@@ -3,6 +3,7 @@ import { Page } from 'widgets/page.widget.tsx'
 import { HotelsPage } from "views/hotels/hotels.page.tsx";
 import { ReservationsPage } from "views/reservations/reservations.page.tsx";
 import { ProfilePage } from "views/profile/profile.page.tsx";
+import { StatsPage } from "views/stats/stats.page.tsx";
 export const router = createBrowserRouter([
   {
     path: '/',
@@ -23,6 +24,10 @@ export const router = createBrowserRouter([
       {
         path: "/profile",
         Component: ProfilePage,
+      },
+      {
+        path: "/stats",
+        Component: StatsPage,
       },
     ]
   }
