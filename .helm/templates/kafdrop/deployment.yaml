@@ -21,5 +21,7 @@ spec:
             - name: http
               containerPort: 9000
           env:
+            - name: SERVER_SERVLET_CONTEXTPATH
+              value: "/"
             - name: KAFKA_BROKERCONNECT
               value: "kafka:9092"
