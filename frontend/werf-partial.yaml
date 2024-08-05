@@ -4,9 +4,8 @@ final: false
 from: docker.io/library/node:18-alpine
 fromCacheVersion: {{ .cacheVersion }}
 git:
-  - to: /app
-    includePaths:
-      - frontend/*
+  - add: /frontend
+    to: /app
     excludePaths:
       - frontend/werf-partial.yaml
     stageDependencies:
@@ -16,9 +15,11 @@ git:
       beforeSetup:
         - "**/*"
 shell:
-  beforeSetup:
+  install:
     - cd /app
     - npm install --production
+  beforeSetup:
+    - cd /app
     - npm run build
 ---
 image: frontend
