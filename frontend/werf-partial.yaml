@@ -9,6 +9,12 @@ git:
       - frontend/*
     excludePaths:
       - frontend/werf-partial.yaml
+    stageDependencies:
+      install:
+        - package.json
+        - package-lock.json
+      beforeSetup:
+        - "**/*"
 shell:
   beforeSetup:
     - cd /app
