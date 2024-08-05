@@ -1,4 +1,4 @@
-package com.wrathenn.gateway.service.kafka
+package com.wrathenn.stats.service.kafka
 
 import com.wrathenn.util.models.statistics.StatTemplate
 import org.apache.kafka.clients.CommonClientConfigs

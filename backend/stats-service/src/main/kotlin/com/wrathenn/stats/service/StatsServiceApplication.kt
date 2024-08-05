@@ -1,4 +1,4 @@
-package com.wrathenn.gateway.service
+package com.wrathenn.stats.service
 
 import com.wrathenn.util.spring.ApiExceptionHandler
 import com.wrathenn.util.spring.HealthController
