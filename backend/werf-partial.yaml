@@ -140,7 +140,7 @@ from: docker.io/library/eclipse-temurin:17-jre-jammy
 import:
   - image: jars
     after: install
-    add: /project/backend/gateway-service/build/libs/
+    add: /project/backend/stats-service/build/libs/
     to: /app
     includePaths:
       - stats-service-*-all.jar
