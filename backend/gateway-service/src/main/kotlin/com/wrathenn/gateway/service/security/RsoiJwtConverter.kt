@@ -8,11 +8,22 @@ import org.springframework.stereotype.Component
 
 @Component
 class RsoiJwtConverter(val mapper: ObjectMapper): Converter<Jwt, RsoiAuthenticationToken> {
+    data class ResourceAccessItem(
+        val roles: List<String>,
+    )
+
     override fun convert(jwt: Jwt): RsoiAuthenticationToken {
         val username: String = mapper.convertValue(jwt.getClaim("email"))
 
+        val resourceAccess = mapper.convertValue<Map<String, ResourceAccessItem>>(jwt.getClaim("resource_access"))
+        val allRoles = resourceAccess.values.flatMap { it.roles }
+        val role = when {
+            allRoles.contains("ADMIN") -> UserRole.ADMIN
+            else -> UserRole.USER
+        }
+
         val principal = RsoiPrincipal(
-            role = UserRole.USER,
+            role = role,
             userClaim = UserClaim(id = username)
         )
 
