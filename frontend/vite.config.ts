@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite'
-import mkcert from 'vite-plugin-mkcert'
-import react from '@vitejs/plugin-react-swc'
+import react from '@vitejs/plugin-react'
+import tsconfigPaths from 'vite-tsconfig-paths'
+import svgr from "vite-plugin-svgr";
 
 const env = process.env.VITE_KEYCLOAK_ENDPOINT;
 const target = `http://${env}/`;
@@ -18,5 +19,9 @@ export default defineConfig({
       },
     }
   },
-  plugins: [react(), /* mkcert() */],
+  plugins: [
+    svgr(),
+    react(),
+    tsconfigPaths(),
+  ],
 })
