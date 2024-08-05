@@ -24,4 +24,4 @@ spec:
             - name: SERVER_SERVLET_CONTEXTPATH
               value: "/"
             - name: KAFKA_BROKERCONNECT
-              value: "kafka:9092"
+              value: "kafka-kafka-bootstrap:9092"
