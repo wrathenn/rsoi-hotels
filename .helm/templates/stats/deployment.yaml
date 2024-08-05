@@ -1,0 +1,71 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: stats
+  labels:
+    app.kubernetes.io/name: stats
+spec:
+  replicas: {{ .Values.stats.replicas }}
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: stats
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: stats
+    spec:
+      securityContext:
+        fsGroup: 2000
+      containers:
+      - name: stats
+        image: {{ .Values.werf.image.stats }}
+        env:
+          - name: app.debug-mode
+            value: "{{ .Values.stats.debug }}"
+          - name: spring.datasource.url
+            value: jdbc:postgresql://hoteldb-rw:5432/stats
+          - name: spring.datasource.username
+            value: backend
+          - name: spring.datasource.password
+            value: backend
+        ports:
+          - name: http
+            containerPort: 8080
+        livenessProbe:
+          httpGet:
+            port: http
+            path: /manage/health
+          periodSeconds: 5
+          failureThreshold: 6
+          initialDelaySeconds: 2
+        readinessProbe:
+          httpGet:
+            port: http
+            path: /manage/health
+          periodSeconds: 5
+          initialDelaySeconds: 2
+        startupProbe:
+          httpGet:
+            port: http
+            path: /manage/health
+          periodSeconds: 2
+          failureThreshold: 30
+          initialDelaySeconds: 2
+        resources:
+          {{- toYaml .Values.stats.resources | nindent 12 }}
+        volumeMounts:
+          - mountPath: /workdir
+            name: workdir
+      volumes:
+        - name: workdir
+          emptyDir: {}
+      {{- with .Values.stats.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.stats.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

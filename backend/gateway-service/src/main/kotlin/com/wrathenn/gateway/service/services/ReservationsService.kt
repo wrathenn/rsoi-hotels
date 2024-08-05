@@ -4,6 +4,7 @@ import com.wrathenn.gateway.service.kafka.RequestsSender
 import com.wrathenn.gateway.service.clients.LoyaltyClient
 import com.wrathenn.gateway.service.clients.PaymentClient
 import com.wrathenn.gateway.service.clients.ReservationClient
+import com.wrathenn.gateway.service.kafka.StatsSender
 import com.wrathenn.gateway.service.models.PaymentDto
 import com.wrathenn.gateway.service.models.ReservationDto
 import com.wrathenn.gateway.service.models.ReservationInfoDto
@@ -13,7 +14,10 @@ import com.wrathenn.util.models.payment.PaymentCreate
 import com.wrathenn.util.models.reservation.ReservationCreate
 import com.wrathenn.util.models.reservation.ReservationRequest
 import com.wrathenn.util.models.reservation.ReservationStatus
+import com.wrathenn.util.models.statistics.StatData
+import com.wrathenn.util.models.statistics.StatTemplate
 import org.springframework.stereotype.Service
+import java.time.Instant
 import java.time.LocalDate
 import java.time.ZoneOffset
 import java.util.UUID
@@ -24,6 +28,7 @@ class ReservationsService(
     private val loyaltyClient: LoyaltyClient,
     private val paymentClient: PaymentClient,
     private val requestsSender: RequestsSender,
+    private val statsSender: StatsSender,
 ) {
     fun getReservation(reservationUid: UUID): ReservationInfoDto {
         val reservationAndHotel = reservationClient.getReservation(reservationUid)
@@ -93,6 +98,10 @@ class ReservationsService(
             requestsSender.sendRequest(KafkaRequest.LoyaltyUpdateReservationCountRequest(
                 username,
                 LoyaltyReservationCountOperation.DECREMENT,
+            ))
+            statsSender.sendStat(StatTemplate(
+                ts = Instant.now(),
+                data = StatData.LoyaltyFailedUpdate(username, LoyaltyReservationCountOperation.DECREMENT)
             ))
         }
     }

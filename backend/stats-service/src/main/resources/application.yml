@@ -1,0 +1,23 @@
+server:
+  servlet:
+    context-path: /api/stats
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/stats
+    username: backend
+    password: backend
+    driver-class-name: org.postgresql.Driver
+
+kafka:
+  group-id: stats
+  bootstrap-servers: kafka-kafka-bootstrap:9092
+  sasl:
+    enabled: false
+    username: user
+    password: password
+  topic: "stats"
+logging:
+  level:
+    org.springframework.cloud: DEBUG
+    org.springframework.web: DEBUG

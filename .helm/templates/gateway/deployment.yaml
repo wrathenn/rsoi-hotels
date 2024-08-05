@@ -30,6 +30,8 @@ spec:
             value: http://payment
           - name: app.interop.loyalty-client-api
             value: http://loyalty
+          - name: app.interop.stats-client-api
+            value: http://stats
           - name: spring.security.oauth2.resourceserver.jwt.jwk-set-uri
             value: http://keycloak/auth/realms/rsoi-hotels/protocol/openid-connect/certs # try external if fails
         ports:

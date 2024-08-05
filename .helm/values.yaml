@@ -102,3 +102,16 @@ frontend:
       memory: 4Gi
   nodeSelector: {}
   tolerations: []
+
+stats:
+  enabled: true
+  replicas: 1
+  debug: true
+  resources:
+    requests:
+      cpu: 2m
+      memory: 455Mi
+    limits:
+      memory: 4Gi
+  nodeSelector: {}
+  tolerations: []

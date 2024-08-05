@@ -12,4 +12,5 @@ include(
     "payment-service",
     "loyalty-service",
     "gateway-service",
+    "stats-service",
 )

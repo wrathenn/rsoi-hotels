@@ -25,7 +25,7 @@ shell:
     - cd /project/backend
     - export LANG=en_US.UTF-8
     - export GRADLE_OPTS="-Xmx2g -XX:MaxMetaspaceSize=512m -XX:+HeapDumpOnOutOfMemoryError -Dfile.encoding=UTF-8"
-    - gradle :gateway-service:bootJar :loyalty-service:bootJar :payment-service:bootJar :reservation-service:bootJar --parallel
+    - gradle :gateway-service:bootJar :loyalty-service:bootJar :payment-service:bootJar :reservation-service:bootJar :stats-service:bootJar --parallel
 ---
 image: loyalty
 from: docker.io/library/eclipse-temurin:17-jre-jammy
@@ -134,3 +134,30 @@ docker:
     - -XX:+HeapDumpOnOutOfMemoryError
     - -Xmx3g
     - /app/gateway-service.jar
+---
+image: stats
+from: docker.io/library/eclipse-temurin:17-jre-jammy
+import:
+  - image: jars
+    after: install
+    add: /project/backend/gateway-service/build/libs/
+    to: /app
+    includePaths:
+      - stats-service-*-all.jar
+shell:
+  beforeSetup:
+    - mv /app/stats-service-*-all.jar /app/stats-service.jar
+docker:
+  EXPOSE: "8080"
+  WORKDIR: "/workdir"
+  ENTRYPOINT:
+    - java
+    - -jar
+    - -Dfile.encoding=UTF-8
+    - -Djava.awt.headless=true
+    - -Dspring.profiles.active=prod
+    - -XX:MaxMetaspaceSize=512m
+    - -XX:+CrashOnOutOfMemoryError
+    - -XX:+HeapDumpOnOutOfMemoryError
+    - -Xmx3g
+    - /app/stats-service.jar
