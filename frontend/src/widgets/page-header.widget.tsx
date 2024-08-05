@@ -1,7 +1,6 @@
 import { observer } from 'mobx-react-lite'
 import React from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { Tooltip } from 'react-tooltip'
 
 export const PageHeader: React.FC = observer(() => {
     const location = useLocation()

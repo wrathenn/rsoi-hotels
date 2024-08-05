@@ -10,7 +10,7 @@ export const ReservationsPage: React.FC = observer(() => {
     void ReservationsVm.loadData()
   }, [])
   
-  const onCancelTicketClick = (ticket: ReservationSchema.Dto) => {
+  const onCancelTicketClick = (ticket: ReservationSchema.InfoDto) => {
       ReservationsVm.showCancelReservationModal(ticket)
   }
 

@@ -1,0 +1,15 @@
+{{ if .Values.frontend.enabled -}}
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend
+  labels:
+    app.kubernetes.io/name: frontend
+spec:
+  selector:
+    app.kubernetes.io/name: frontend
+  ports:
+    - port: 80
+      name: http
+      targetPort: http
+{{ end -}}

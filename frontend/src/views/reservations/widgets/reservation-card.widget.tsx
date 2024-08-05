@@ -1,6 +1,5 @@
 import { ReservationSchema } from 'api/schemas/reservationSchema.ts'
 import React from 'react'
-import { formatTemporalDateTime } from 'utils'
 
 export const ReservationCard: React.FC<{
   reservation: ReservationSchema.InfoDto
@@ -12,8 +11,8 @@ export const ReservationCard: React.FC<{
         <div className="w-[80px]">{x.reservation.reservationUid.split("-")[0]}</div>
         <div className="w-[200px]">{x.reservation.hotel.name}</div>
         <div className="flex items-center gap-1 w-[400px]">
-          <div>От: {x.reservation.startDate}</div>
-          <div>До: {x.reservation.endDate}</div>
+          <div>От: {x.reservation.startDate?.toString()}</div>
+          <div>До: {x.reservation.endDate?.toString()}</div>
         </div>
       </div>
       <div className="flex items-center gap-2">

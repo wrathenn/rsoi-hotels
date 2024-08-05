@@ -1,6 +1,6 @@
 import { ReservationsApi } from 'api/endpoints/reservations.ts'
 import { ReservationSchema } from 'api/schemas/reservationSchema.ts'
-import { makeAutoObservable, reaction } from 'mobx'
+import { makeAutoObservable } from 'mobx'
 
 export const ReservationsVm = new class {
   private _reservations: ReservationSchema.InfoDto[] = []
@@ -9,8 +9,8 @@ export const ReservationsVm = new class {
   private _isCancelReservationModalShowed = false
   get isCancelReservationModalShowed() { return this._isCancelReservationModalShowed }
 
-  selectedReservation: ReservationSchema.Dto | null = null
-  readonly showCancelReservationModal = (reservation: ReservationSchema.Dto) => {
+  selectedReservation: ReservationSchema.InfoDto | null = null
+  readonly showCancelReservationModal = (reservation: ReservationSchema.InfoDto) => {
     this._isCancelReservationModalShowed = true
     this.selectedReservation = reservation
   }

@@ -90,3 +90,15 @@ keycloak:
       memory: 376Mi
     limits:
       memory: 4Gi
+
+frontend:
+  enabled: true
+  replicas: 1
+  resources:
+    requests:
+      cpu: 2m
+      memory: 455Mi
+    limits:
+      memory: 4Gi
+  nodeSelector: {}
+  tolerations: []

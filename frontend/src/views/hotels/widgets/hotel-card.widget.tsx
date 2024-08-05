@@ -1,6 +1,5 @@
 import { HotelSchema } from 'api/schemas/hotelSchema.ts'
 import React from 'react'
-import { formatTemporalDateTime } from 'utils'
 
 export const HotelCard: React.FC<{
   hotel: HotelSchema.Dto

@@ -1,6 +1,6 @@
 import { HotelsApi } from 'api/endpoints/hotels.ts'
 import { HotelSchema } from 'api/schemas/hotelSchema.ts'
-import { makeAutoObservable, reaction } from "mobx"
+import { makeAutoObservable } from "mobx"
 
 export const HotelsVm = new class {
   hotels: HotelSchema.Dto[] = []
