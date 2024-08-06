@@ -1,0 +1,45 @@
+name: Actions Runner Controller Demo
+
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+    inputs:
+      manual-trigger:
+        description: 'Manually trigger the workflow'
+        required: true
+
+jobs:
+  recreate:
+    name: Recreate
+    runs-on: arc-runner-set
+
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Install dependencies
+        run: |
+          sudo apt update -y
+          sudo apt install git -y
+          sudo apt install buildah -y
+
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Install werf
+        uses: werf/actions/install@v1.2
+
+      - name: Log in to registry
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+
+      - name: Run script
+        run: |
+          werf dismiss
+          . $(werf ci-env github --as-file)
+          export WERF_BUILDAH_MODE=auto
+          werf converge
