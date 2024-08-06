@@ -39,6 +39,18 @@ class StatRepositoryImpl : StatRepository {
     override fun findStatsByTypes(types: List<StatData.Type>): List<Stat<*>> {
         if (types.isEmpty()) return emptyList()
 
+        select("""
+            explain analyze
+            select id, ts, data
+            from stats.stats
+            where data->>'type' = any(:types)
+            order by ts desc
+        """.trimIndent())
+            .bindArray("types", String::class.java, types.map { it.toString() }.toTypedArray())
+            .mapTo<String>()
+            .list()
+            .forEach(::println)
+
         return select("""
             select id, ts, data
             from stats.stats

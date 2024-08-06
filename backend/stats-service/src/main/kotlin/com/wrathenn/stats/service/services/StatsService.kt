@@ -27,6 +27,8 @@ class StatsServiceImpl(
     }
 
     override fun getStats(statTypes: List<StatData.Type>): List<Stat<*>> = jdbi.transact {
-        statRepository.findStatsByTypes(statTypes)
+        val stats = statRepository.findStatsByTypes(statTypes)
+        logger.info("Got $stats")
+        stats
     }
 }
