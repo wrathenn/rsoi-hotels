@@ -21,11 +21,11 @@ shell:
     - export LANG=en_US.UTF-8
     - export GRADLE_OPTS="-Xmx2g -XX:MaxMetaspaceSize=512m -XX:+HeapDumpOnOutOfMemoryError -Dfile.encoding=UTF-8"
   beforeSetup:
-    - apt-get update && apt-get install -y --no-install-recommends apt-utils
-    - apt-get upgrade -y
-    - apt-get install traceroute
-    - traceroute repo.maven.apache.org
-    - wget https://repo.maven.apache.org/maven2/org/springframework/amqp/spring-amqp/maven-metadata.xml
+#    - apt-get update && apt-get install -y --no-install-recommends apt-utils
+#    - apt-get upgrade -y
+#    - apt-get install traceroute
+#    - traceroute repo.maven.apache.org
+#    - wget https://repo.maven.apache.org/maven2/org/springframework/amqp/spring-amqp/maven-metadata.xml
     - export GRADLE_USER_HOME=/gradle_home
     - cd /project/backend
     - export LANG=en_US.UTF-8

@@ -31,6 +31,7 @@ class StatRepositoryImpl : StatRepository {
         """.trimIndent())
             .bindKotlin(StatInsertableEntity(ts = stat.ts, data = stat.data))
             .mapTo<Long>()
+            .one()
         logger.info("Inserted with id = $id")
     }
 
