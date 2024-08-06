@@ -53,5 +53,5 @@ kafka:
   topic_stats: "stats"
 logging:
   level:
-    org.springframework.cloud: DEBUG
-    org.springframework.web: DEBUG
+    org.springframework.cloud: TRACE
+    org.springframework.web: INFO
