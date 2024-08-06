@@ -11,7 +11,8 @@ import org.springframework.stereotype.Component
 import java.lang.Exception
 
 interface LoyaltiesRepository {
-    context(Handle) fun getLoyaltyByUsername(username: String, forUpdate: Boolean = false): Loyalty
+    context(Handle) fun initLoyalty(username: String): Loyalty
+    context(Handle) fun getLoyaltyByUsername(username: String, forUpdate: Boolean = false): Loyalty?
     context(Handle) fun updateLoyalty(
         username: String,
         reservationCount: Int,
@@ -23,7 +24,19 @@ interface LoyaltiesRepository {
 @Component
 class LoyaltiesRepositoryImpl : LoyaltiesRepository {
     context(Handle)
-    override fun getLoyaltyByUsername(username: String, forUpdate: Boolean): Loyalty {
+    override fun initLoyalty(username: String): Loyalty {
+        return createQuery("""
+            insert into loyalty.loyalty(username) values (:username)
+            returning id, username, reservation_count, status, discount
+        """.trimIndent())
+            .bind("username", username)
+            .mapTo<LoyaltyEntity>()
+            .one()
+            .toModel()
+    }
+
+    context(Handle)
+    override fun getLoyaltyByUsername(username: String, forUpdate: Boolean): Loyalty? {
         val forUpdatePart = if (forUpdate) "for update" else ""
 
         return select("""
@@ -41,7 +54,6 @@ class LoyaltiesRepositoryImpl : LoyaltiesRepository {
             .mapTo<LoyaltyEntity>()
             .firstOrNull()
             ?.toModel()
-            ?: throw ResourceNotFoundException("Карта лояльности для пользователя $username не найдена")
     }
 
     context(Handle) override fun updateLoyalty(

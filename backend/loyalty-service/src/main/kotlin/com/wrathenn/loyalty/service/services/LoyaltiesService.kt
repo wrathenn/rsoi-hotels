@@ -1,6 +1,7 @@
 package com.wrathenn.loyalty.service.services
 
 import com.wrathenn.loyalty.service.repositories.LoyaltiesRepository
+import com.wrathenn.util.exceptions.ResourceNotFoundException
 import com.wrathenn.util.models.loyalty.Loyalty
 import com.wrathenn.util.models.loyalty.LoyaltyReservationCountOperation
 import com.wrathenn.util.models.loyalty.LoyaltyStatus
@@ -22,6 +23,7 @@ class LoyaltiesServiceImpl(
     context(Handle)
     override fun getLoyalty(username: String): Loyalty {
         return loyaltiesRepository.getLoyaltyByUsername(username)
+            ?: loyaltiesRepository.initLoyalty(username)
     }
 
     context(Handle)
@@ -30,6 +32,8 @@ class LoyaltiesServiceImpl(
         loyaltyReservationCountOperation: LoyaltyReservationCountOperation,
     ): Loyalty {
         val loyalty = loyaltiesRepository.getLoyaltyByUsername(username, forUpdate = true)
+            ?: loyaltiesRepository.initLoyalty(username)
+
         val newReservationCount = loyalty.reservationCount + when (loyaltyReservationCountOperation) {
             LoyaltyReservationCountOperation.INCREMENT -> +1
             LoyaltyReservationCountOperation.DECREMENT -> -1
