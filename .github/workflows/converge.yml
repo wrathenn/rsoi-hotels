@@ -1,16 +1,11 @@
 name: Actions Runner Controller Demo
 
 on:
-  push:
-    branches:
-      - master
-  pull_request:
-    branches:
-      - master
+  workflow_dispatch:
 
 jobs:
-  converge:
-    name: Converge
+  recreate:
+    name: Recreate
     runs-on: arc-runner-set
 
     permissions:
@@ -37,6 +32,7 @@ jobs:
 
       - name: Run script
         run: |
+          werf dismiss
           . $(werf ci-env github --as-file)
           export WERF_BUILDAH_MODE=auto
           werf converge
