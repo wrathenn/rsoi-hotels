@@ -24,7 +24,7 @@ shell:
     - apt-get update && apt-get install -y --no-install-recommends apt-utils
     - apt-get upgrade -y
     - apt-get install traceroute
-    - traceroute 8.8.8.8
+    - traceroute repo.maven.apache.org
     - export GRADLE_USER_HOME=/gradle_home
     - cd /project/backend
     - export LANG=en_US.UTF-8
