@@ -5,8 +5,8 @@ val springCloudVersion: String by project
 
 plugins {
     // version sharing
-    kotlin("jvm") version "1.9.10" apply false
-    kotlin("plugin.spring") version "1.9.10" apply false
+    kotlin("jvm") version "1.9.20" apply false
+    kotlin("plugin.spring") version "1.9.20" apply false
     id("org.springframework.boot") version "3.2.1" apply false
     id("com.github.johnrengelman.shadow") version "7.1.2" apply false
     id("com.intershop.gradle.jaxb") version "5.2.1" apply false
