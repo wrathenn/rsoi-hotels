@@ -1,9 +1,6 @@
 name: Actions Runner Controller Demo
 
 on:
-  push:
-    branches:
-      - master
   workflow_dispatch:
     inputs:
       manual-trigger:
