@@ -21,6 +21,8 @@ shell:
     - export LANG=en_US.UTF-8
     - export GRADLE_OPTS="-Xmx2g -XX:MaxMetaspaceSize=512m -XX:+HeapDumpOnOutOfMemoryError -Dfile.encoding=UTF-8"
   beforeSetup:
+    - apt-get update
+    - apt-get upgrade
     - apt-get install traceroute
     - traceroute 8.8.8.8
     - export GRADLE_USER_HOME=/gradle_home
