@@ -36,6 +36,7 @@ class StatRepositoryImpl : StatRepository {
             select id, ts, data
             from stats.stats
             where data->>'type' = any(:types)
+            order by ts desc
         """.trimIndent())
             .bindArray("types", String::class.java, types.map { it.toString() }.toTypedArray())
             .mapTo<StatEntity>()
