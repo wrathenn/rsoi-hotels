@@ -27,9 +27,16 @@ spec:
           - name: spring.datasource.url
             value: jdbc:postgresql://hoteldb-rw:5432/loyalty
           - name: spring.datasource.username
+            valueFrom:
+              secretKeyRef:
+                key: user
+                name: hoteldb-superuser
             value: backend
           - name: spring.datasource.password
-            value: backend
+            valueFrom:
+              secretKeyRef:
+                key: password
+                name: hoteldb-superuser
         ports:
           - name: http
             containerPort: 8080
