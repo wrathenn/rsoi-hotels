@@ -35,7 +35,8 @@ jobs:
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
 
       - name: Run script
+
         run: |
           . $(werf ci-env github --as-file)
           export WERF_BUILDAH_MODE=auto
-          werf cleanup
+          werf cleanup --final-repo-github-token ${{ secrets.SECRET_TOKEN }}
