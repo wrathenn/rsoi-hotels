@@ -14,6 +14,7 @@ import org.springframework.context.annotation.Import
 )
 class StatsServiceApplication
 
+
 fun main(args: Array<String>) {
     runApplication<StatsServiceApplication>(*args)
 }
