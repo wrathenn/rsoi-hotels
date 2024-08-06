@@ -3,7 +3,9 @@ name: Actions Runner Controller Demo
 on:
   workflow_dispatch:
     inputs:
-
+      manual-trigger:
+        description: 'Manually trigger the workflow'
+        required: true
 
 jobs:
   recreate:
