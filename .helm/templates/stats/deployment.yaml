@@ -33,7 +33,6 @@ spec:
               secretKeyRef:
                 key: user
                 name: hoteldb-superuser
-            value: backend
           - name: spring.datasource.password
             valueFrom:
               secretKeyRef:
