@@ -1,4 +1,4 @@
-package com.wrathenn.util.spring
+package com.wrathenn.stats.service.configurations
 
 import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.databind.ObjectMapper
