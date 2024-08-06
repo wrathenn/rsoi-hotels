@@ -6,6 +6,7 @@ import com.wrathenn.util.models.statistics.Stat
 import com.wrathenn.util.models.statistics.StatData
 import com.wrathenn.util.models.statistics.StatTemplate
 import org.jdbi.v3.core.Jdbi
+import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
 
 interface StatsService {
@@ -18,7 +19,10 @@ class StatsServiceImpl(
     private val jdbi: Jdbi,
     private val statRepository: StatRepository,
 ) : StatsService {
+    private val logger = LoggerFactory.getLogger(this::class.java)
+
     override fun insertStat(statTemplate: StatTemplate<*>) = jdbi.transact {
+        logger.info("inserting stat in service")
         statRepository.insert(statTemplate)
     }
 

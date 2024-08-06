@@ -8,6 +8,7 @@ import com.wrathenn.util.models.statistics.StatTemplate
 import org.jdbi.v3.core.Handle
 import org.jdbi.v3.core.kotlin.bindKotlin
 import org.jdbi.v3.core.kotlin.mapTo
+import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Component
 
 interface StatRepository {
@@ -17,8 +18,12 @@ interface StatRepository {
 
 @Component
 class StatRepositoryImpl : StatRepository {
+    private val logger = LoggerFactory.getLogger(this::class.java)
+
     context(Handle)
     override fun insert(stat: StatTemplate<*>) {
+        logger.info("Inserting stat in repository")
+
         val id = createQuery("""
             insert into stats.stats(ts, data)
             values (:ts, :data)
@@ -26,6 +31,7 @@ class StatRepositoryImpl : StatRepository {
         """.trimIndent())
             .bindKotlin(StatInsertableEntity(ts = stat.ts, data = stat.data))
             .mapTo<Long>()
+        logger.info("Inserted with id = $id")
     }
 
     context(Handle)
