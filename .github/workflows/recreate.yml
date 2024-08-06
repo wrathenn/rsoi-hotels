@@ -40,7 +40,6 @@ jobs:
       - name: Run script
         run: |
           echo "BRUH"
-#          werf dismiss
           . $(werf ci-env github --as-file)
           export WERF_BUILDAH_MODE=auto
           werf converge
