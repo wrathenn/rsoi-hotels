@@ -21,3 +21,4 @@ logging:
   level:
     org.springframework.cloud: DEBUG
     org.springframework.web: DEBUG
+    org.apache.kafka: TRACE
