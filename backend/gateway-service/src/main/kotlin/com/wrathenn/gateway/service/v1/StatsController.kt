@@ -3,6 +3,8 @@ package com.wrathenn.gateway.service.v1
 import com.wrathenn.gateway.service.clients.StatsClient
 import com.wrathenn.gateway.service.models.StatDto
 import com.wrathenn.gateway.service.security.AuthContext
+import com.wrathenn.gateway.service.security.UserRole
+import com.wrathenn.util.exceptions.ForbiddenException
 import org.springframework.web.bind.annotation.CrossOrigin
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
@@ -17,7 +19,10 @@ class StatsController(
 ) {
     @GetMapping
     fun getStats(): List<StatDto> {
-        val username = authContext.getCurrentPrincipal().userClaim.id
+        val principal = authContext.getCurrentPrincipal()
+        if (principal.role != UserRole.ADMIN) {
+            throw ForbiddenException("Forbidden")
+        }
         return statsClient.getStats().map { StatDto.fromModel(it) }
     }
 }

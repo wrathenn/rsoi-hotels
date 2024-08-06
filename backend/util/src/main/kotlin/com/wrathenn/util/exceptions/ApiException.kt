@@ -29,3 +29,8 @@ class ServiceUnavailableException(
     override val message: String,
     override val cause: Throwable? = null,
 ) : ApiException(message, cause)
+
+class ForbiddenException(
+    override val message: String,
+    override val cause: Throwable? = null,
+) : ApiException(message, cause)

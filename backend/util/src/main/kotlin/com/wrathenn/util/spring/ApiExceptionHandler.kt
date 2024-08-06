@@ -34,6 +34,12 @@ class ApiExceptionHandler {
             .body(getErrorDescription(request, e))
     }
 
+    @ExceptionHandler(ForbiddenException::class)
+    fun handleForbidden(e: ForbiddenException, request: WebRequest): ResponseEntity<ErrorDescription> {
+        return ResponseEntity.status(HttpStatus.FORBIDDEN)
+            .body(getErrorDescription(request, e))
+    }
+
     @ExceptionHandler(ApiException::class)
     fun handleGeneralApiException(e: ApiException, request: WebRequest): ResponseEntity<ErrorDescription> {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
