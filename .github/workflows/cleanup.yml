@@ -39,4 +39,4 @@ jobs:
         run: |
           . $(werf ci-env github --as-file)
           export WERF_BUILDAH_MODE=auto
-          werf cleanup --final-repo-github-token ${{ secrets.SECRET_TOKEN }}
+          werf cleanup --repo-github-token ${{ secrets.SECRET_TOKEN }}
