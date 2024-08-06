@@ -423,6 +423,15 @@
           "clientRole": true,
           "containerId": "e2beeac1-f2b9-47f7-bc2e-9b5202baf327",
           "attributes": {}
+        },
+        {
+          "id": "cda8f186-e379-43b2-92c6-a88bcb4367b3",
+          "name": "ADMIN",
+          "description": "",
+          "composite": false,
+          "clientRole": true,
+          "containerId": "e2beeac1-f2b9-47f7-bc2e-9b5202baf327",
+          "attributes": {}
         }
       ]
     }
