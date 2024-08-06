@@ -4,6 +4,8 @@ metadata:
   name: reservation
   labels:
     app.kubernetes.io/name: reservation
+  annotations:
+    werf.io/weight: "-10"
 spec:
   replicas: {{ .Values.reservation.replicas }}
   strategy:

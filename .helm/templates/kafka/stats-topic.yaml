@@ -4,5 +4,7 @@ metadata:
   name: stats-topic
   labels:
     strimzi.io/cluster: kafka
+  annotations:
+    werf.io/weight: "-50"
 spec:
   topicName: stats

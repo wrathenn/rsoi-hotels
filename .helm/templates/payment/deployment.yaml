@@ -4,6 +4,8 @@ metadata:
   name: payment
   labels:
     app.kubernetes.io/name: payment
+  annotations:
+    werf.io/weight: "-10"
 spec:
   replicas: {{ .Values.payment.replicas }}
   strategy:

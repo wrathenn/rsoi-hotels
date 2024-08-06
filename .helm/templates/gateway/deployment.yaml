@@ -4,6 +4,8 @@ metadata:
   name: gateway
   labels:
     app.kubernetes.io/name: gateway
+  annotations:
+    werf.io/weight: "-10"
 spec:
   replicas: {{ .Values.gateway.replicas }}
   strategy:

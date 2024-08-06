@@ -4,6 +4,8 @@ metadata:
   name: loyalty
   labels:
     app.kubernetes.io/name: loyalty
+  annotations:
+    werf.io/weight: "-10"
 spec:
   selector:
     app.kubernetes.io/name: loyalty

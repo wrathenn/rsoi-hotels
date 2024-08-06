@@ -5,6 +5,8 @@ metadata:
   name: frontend
   labels:
     app.kubernetes.io/name: frontend
+  annotations:
+    werf.io/weight: "-50"
 spec:
   selector:
     app.kubernetes.io/name: frontend

@@ -4,6 +4,8 @@ metadata:
   name: stats
   labels:
     app.kubernetes.io/name: stats
+  annotations:
+    werf.io/weight: "-10"
 spec:
   selector:
     app.kubernetes.io/name: stats
