@@ -6,7 +6,6 @@ import com.wrathenn.util.models.statistics.StatData
 import org.springframework.web.bind.annotation.*
 
 @RestController
-@RequestMapping("/stats")
 class StatsController(
     private val statsService: StatsService,
 ) {

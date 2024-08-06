@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*
 )
 @Primary
 interface StatsClient {
-    @GetMapping("/stats/{paymentUid}")
+    @GetMapping("/api/stats/{paymentUid}")
     fun getStats(): List<Stat<*>>
 }
 
