@@ -10,6 +10,6 @@ data class StatDto(
     val data: StatData,
 ) {
     companion object {
-        fun fromModel(stat: Stat<*>) = StatDto(id = stat.id, ts = stat.ts, data = stat.data)
+        fun fromModel(stat: Stat) = StatDto(id = stat.id, ts = stat.ts, data = stat.data)
     }
 }

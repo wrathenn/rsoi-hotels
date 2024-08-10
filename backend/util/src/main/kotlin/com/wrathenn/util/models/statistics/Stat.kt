@@ -5,10 +5,10 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo
 import com.wrathenn.util.models.loyalty.LoyaltyReservationCountOperation
 import java.time.Instant
 
-data class Stat<D: StatData>(
+data class Stat(
     val id: Long,
     val ts: Instant,
-    val data: D,
+    val data: StatData,
 )
 
 data class StatTemplate<D: StatData>(

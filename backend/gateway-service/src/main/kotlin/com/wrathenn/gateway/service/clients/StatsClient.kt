@@ -15,14 +15,14 @@ import org.springframework.web.bind.annotation.*
 @Primary
 interface StatsClient {
     @GetMapping("/api/stats/{paymentUid}")
-    fun getStats(): List<Stat<*>>
+    fun getStats(): List<Stat>
 }
 
 @Component
 class StatsClientFallback: StatsClient {
     private val logger = LoggerFactory.getLogger(this::class.java)
 
-    override fun getStats(): List<Stat<*>> {
+    override fun getStats(): List<Stat> {
         logger.warn("Unsuccessful getStats, using empty list")
         return emptyList()
     }

@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component
 
 interface StatRepository {
     context(Handle) fun insert(stat: StatTemplate<*>)
-    context(Handle) fun findStatsByTypes(types: List<StatData.Type>): List<Stat<*>>
+    context(Handle) fun findStatsByTypes(types: List<StatData.Type>): List<Stat>
 }
 
 @Component
@@ -36,7 +36,7 @@ class StatRepositoryImpl : StatRepository {
     }
 
     context(Handle)
-    override fun findStatsByTypes(types: List<StatData.Type>): List<Stat<*>> {
+    override fun findStatsByTypes(types: List<StatData.Type>): List<Stat> {
         if (types.isEmpty()) return emptyList()
 
         select("""

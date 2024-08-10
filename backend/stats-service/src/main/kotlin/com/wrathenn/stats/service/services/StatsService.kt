@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service
 
 interface StatsService {
     fun insertStat(statTemplate: StatTemplate<*>)
-    fun getStats(statTypes: List<StatData.Type>): List<Stat<*>>
+    fun getStats(statTypes: List<StatData.Type>): List<Stat>
 }
 
 @Service
@@ -26,7 +26,7 @@ class StatsServiceImpl(
         statRepository.insert(statTemplate)
     }
 
-    override fun getStats(statTypes: List<StatData.Type>): List<Stat<*>> = jdbi.transact {
+    override fun getStats(statTypes: List<StatData.Type>): List<Stat> = jdbi.transact {
         val stats = statRepository.findStatsByTypes(statTypes)
         logger.info("Got $stats")
         stats
