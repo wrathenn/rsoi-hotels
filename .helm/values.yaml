@@ -64,6 +64,7 @@ hoteldb:
   parameters:
     max_connections: "100"
     max_prepared_transactions: "100"
+    superuser_reserved_connections: "10"
 
 keycloakdb:
   instances: 1
