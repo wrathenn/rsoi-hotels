@@ -20,7 +20,7 @@ jobs:
     steps:
       - name: Install dependencies
         run: |
-          tail -f /dev/null
+#          tail -f /dev/null
           sudo apt update -y
           sudo apt install git -y
           sudo apt install buildah -y
