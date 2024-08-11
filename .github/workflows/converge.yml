@@ -30,7 +30,7 @@ jobs:
           fetch-depth: 0
 
       - name: Install werf
-        uses: werf/actions/install@v1.2.320
+        uses: werf/actions/install@v1.2
 
       - name: Log in to registry
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
