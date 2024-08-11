@@ -30,14 +30,14 @@ jobs:
           fetch-depth: 0
 
       - name: Install werf
-        uses: werf/actions/install@v1.2
+        uses: werf/actions/install@v1.2.320
 
       - name: Log in to registry
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
 
       - name: Run script
         run: |
-          export WERF_BUILDAH_MODE=auto
           . $(werf ci-env github --as-file)
+          export WERF_BUILDAH_MODE=auto
           werf converge
 
