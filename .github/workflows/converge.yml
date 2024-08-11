@@ -37,7 +37,7 @@ jobs:
 
       - name: Run script
         run: |
-          . $(werf ci-env github --as-file)
           export WERF_BUILDAH_MODE=auto
+          . $(werf ci-env github --as-file)
           werf converge
 
