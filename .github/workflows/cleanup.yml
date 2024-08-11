@@ -10,7 +10,7 @@ on:
 jobs:
   recreate:
     name: Cleanup
-    runs-on: arc-runner-set
+    runs-on: arc-runner-set-2
 
     permissions:
       contents: read
