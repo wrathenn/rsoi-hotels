@@ -20,6 +20,7 @@ jobs:
     steps:
       - name: Install dependencies
         run: |
+          lsb_release -a
           sudo apt update -y
           sudo apt upgrade -y
           sudo apt install git -y
