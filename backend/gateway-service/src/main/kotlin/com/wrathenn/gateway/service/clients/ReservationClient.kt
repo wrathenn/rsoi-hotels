@@ -58,7 +58,7 @@ interface ReservationClient {
         @PathVariable reservationUid: UUID,
     ): Reservation
 
-    @GetMapping("/count")
+    @GetMapping("/reservations/count")
     fun getReservationCountForInterval(
         @RequestHeader hotelId: Long,
         @RequestParam from: LocalDate,
