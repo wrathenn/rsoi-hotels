@@ -137,7 +137,7 @@ class ReservationsRepositoryImpl : ReservationsRepository {
         return createQuery("""
             select count(*)
             from reservation.reservation
-            where tstzrange(start_date, end_date, '[)') && tstzrange((:from)::timestamptz, (:to)::timestamptz), '[)')
+            where tstzrange(start_date, end_date, '[)') && tstzrange((:from)::timestamptz, (:to)::timestamptz, '[)')
               and hotel_id = :hotelId
         """.trimIndent())
             .bind("from", from)
