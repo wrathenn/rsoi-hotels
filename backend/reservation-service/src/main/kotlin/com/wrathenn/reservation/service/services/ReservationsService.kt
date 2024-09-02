@@ -6,6 +6,8 @@ import com.wrathenn.util.models.reservation.ReservationCreate
 import com.wrathenn.util.models.reservation.ReservationWithHotel
 import org.jdbi.v3.core.Handle
 import org.springframework.stereotype.Component
+import org.springframework.web.bind.annotation.RequestParam
+import java.time.LocalDate
 import java.util.*
 
 interface ReservationsService {
@@ -13,6 +15,7 @@ interface ReservationsService {
     context(Handle) fun getReservationsByUsername(username: String): List<ReservationWithHotel>
     context(Handle) fun createReservation(reservationCreate: ReservationCreate): Reservation
     context(Handle) fun cancelReservation(reservationUid: UUID): Reservation
+    context(Handle) fun getReservationCountForInterval(hotelId: Int, from: LocalDate, to: LocalDate): Int
 }
 
 @Component
@@ -34,5 +37,9 @@ class ReservationsServiceImpl(
 
     context(Handle) override fun cancelReservation(reservationUid: UUID): Reservation {
         return reservationsRepository.cancelReservation(reservationUid)
+    }
+
+    context(Handle) override fun getReservationCountForInterval(hotelId: Int, from: LocalDate, to: LocalDate): Int {
+        return reservationsRepository.getReservationCountForInterval(hotelId, from, to)
     }
 }

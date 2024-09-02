@@ -57,6 +57,13 @@ interface ReservationClient {
     fun cancelReservation(
         @PathVariable reservationUid: UUID,
     ): Reservation
+
+    @GetMapping("/count")
+    fun getReservationCountForInterval(
+        @RequestHeader hotelId: Long,
+        @RequestParam from: LocalDate,
+        @RequestParam to: LocalDate,
+    ): Int
 }
 
 
@@ -94,6 +101,10 @@ class ReservationClientFallback: ReservationClient {
     }
 
     override fun cancelReservation(reservationUid: UUID): Reservation {
+        TODO("Not yet implemented")
+    }
+
+    override fun getReservationCountForInterval(hotelId: Long, from: LocalDate, to: LocalDate): Int {
         TODO("Not yet implemented")
     }
 

@@ -9,6 +9,7 @@ import com.wrathenn.gateway.service.models.PaymentDto
 import com.wrathenn.gateway.service.models.ReservationDto
 import com.wrathenn.gateway.service.models.ReservationInfoDto
 import com.wrathenn.gateway.service.models.bnuuy.KafkaRequest
+import com.wrathenn.util.exceptions.BadRequestException
 import com.wrathenn.util.models.loyalty.LoyaltyReservationCountOperation
 import com.wrathenn.util.models.payment.PaymentCreate
 import com.wrathenn.util.models.reservation.ReservationCreate
@@ -52,6 +53,13 @@ class ReservationsService(
     fun createReservation(username: String, request: ReservationRequest): ReservationDto {
         // Проверить, что отель существует
         val hotel = reservationClient.getHotel(request.hotelUid)
+
+        // Проверить, что бронирований меньше 3
+        val reservationsCount = reservationClient.getReservationCountForInterval(hotel.id, request.startDate, request.endDate)
+        if (reservationsCount >= 3) {
+            throw BadRequestException(message = "На выбранный временной промежуток в отеле ${hotel.name} нет доступных мест.")
+        }
+
         // Общая сумма бронирования
         val cost = reservationClient.getHotelCost(request.hotelUid, request.startDate, request.endDate)
 

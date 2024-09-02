@@ -14,6 +14,7 @@ import org.jdbi.v3.core.Handle
 import org.jdbi.v3.core.kotlin.bindKotlin
 import org.jdbi.v3.core.kotlin.mapTo
 import org.springframework.stereotype.Component
+import java.time.LocalDate
 import java.util.*
 
 interface ReservationsRepository {
@@ -21,6 +22,7 @@ interface ReservationsRepository {
     context(Handle) fun getReservationsByUsername(username: String): List<ReservationWithHotel>
     context(Handle) fun createReservation(reservationCreate: ReservationCreate): Reservation
     context(Handle) fun cancelReservation(reservationUid: UUID): Reservation
+    context(Handle) fun getReservationCountForInterval(hotelId: Int, from: LocalDate, to: LocalDate): Int
 }
 
 @Component
@@ -129,5 +131,19 @@ class ReservationsRepositoryImpl : ReservationsRepository {
             .firstOrNull()
             ?.toModel()
             ?: throw ApiException("Ошибка при отмене брони $reservationUid")
+    }
+
+    context(Handle) override fun getReservationCountForInterval(hotelId: Int, from: LocalDate, to: LocalDate): Int {
+        return createQuery("""
+            select count(*)
+            from reservation.reservation
+            where tstzrange(start_date, end_date, '[)') && tstzrange((:from)::timestamptz, (:to)::timestamptz), '[)')
+              and hotel_id = :hotelId
+        """.trimIndent())
+            .bind("from", from)
+            .bind("to", to)
+            .bind("hotelId", hotelId)
+            .mapTo<Int>()
+            .one()
     }
 }

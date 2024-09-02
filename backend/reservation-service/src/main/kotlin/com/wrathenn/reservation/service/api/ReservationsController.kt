@@ -7,6 +7,7 @@ import com.wrathenn.util.models.reservation.ReservationCreate
 import com.wrathenn.util.models.reservation.ReservationWithHotel
 import org.jdbi.v3.core.Jdbi
 import org.springframework.web.bind.annotation.*
+import java.time.LocalDate
 import java.util.*
 
 @RestController
@@ -27,6 +28,15 @@ class ReservationsController(
         @RequestHeader("X-User-Name") username: String
     ): List<ReservationWithHotel> = jdbi.transact {
         reservationsService.getReservationsByUsername(username)
+    }
+
+    @GetMapping("/count")
+    fun getReservationCountForInterval(
+        @RequestHeader hotelId: Int,
+        @RequestParam from: LocalDate,
+        @RequestParam to: LocalDate,
+    ): Int = jdbi.transact {
+        reservationsService.getReservationCountForInterval(hotelId, from, to)
     }
 
     @PostMapping
