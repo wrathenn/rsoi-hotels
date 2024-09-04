@@ -7,9 +7,8 @@ const apiClient = axios.create({
 })
 
 apiClient.interceptors.response.use( async (res) => {
-  if (res.status >= 400) alert(res.data.message)
   return res
-})
+}, async (res) => { alert(res.response.data.message); return res })
 
 apiClient.interceptors.request.use( async (req) => {
   const token = await getKcloakToken()
