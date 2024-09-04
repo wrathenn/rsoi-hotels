@@ -139,10 +139,12 @@ class ReservationsRepositoryImpl : ReservationsRepository {
             from reservation.reservation
             where tstzrange(start_date, end_date, '[)') && tstzrange((:from)::timestamptz, (:to)::timestamptz, '[)')
               and hotel_id = :hotelId
+              and status != :cancel
         """.trimIndent())
             .bind("from", from)
             .bind("to", to)
             .bind("hotelId", hotelId)
+            .bind("cancel", ReservationStatus.CANCELED)
             .mapTo<Int>()
             .one()
     }
