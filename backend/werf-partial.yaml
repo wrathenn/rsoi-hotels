@@ -47,26 +47,43 @@ git:
         - "**/*.gradle.kts"
         - "**/gradle.properties"
 shell:
-  install:
+  setup:
     - apt-get update && apt-get install -y apt-utils wget unzip
-    - export GRADLE_USER_HOME=/gradle_home
+    - cd /opt
     - wget https://dl.google.com/android/repository/commandlinetools-linux-6858069_latest.zip -O sdk-tools.zip
     - mkdir -p android-sdk/cmdline-tools
     - unzip sdk-tools.zip -d android-sdk/cmdline-tools/
     - mv android-sdk/cmdline-tools/cmdline-tools android-sdk/cmdline-tools/latest
+  install:
     - export ANDROID_HOME=/opt/android-sdk
     - export PATH=${PATH}:${ANDROID_HOME}/cmdline-tools/latest/bin:${ANDROID_HOME}/platform-tools
-    - cd /mobile-project
-    - mkdir -p ${ANDROID_HOME}
-    - sdkmanager --update
     - yes | sdkmanager --licenses
+    - sdkmanager --update
     - sdkmanager "platform-tools" "platforms;android-30" "build-tools;30.0.3"
-  beforeSetup:
     - cd /mobile-project/mobile
-    - export GRADLE_USER_HOME=/gradle_home
-    - export LANG=en_US.UTF-8
-    - export GRADLE_OPTS="-Xmx2g -XX:MaxMetaspaceSize=512m -XX:+HeapDumpOnOutOfMemoryError -Dfile.encoding=UTF-8"
     - gradle :app:assembleRelease
+
+#  install:
+#    -
+#    - apt-get update && apt-get install -y apt-utils wget unzip
+#    - export GRADLE_USER_HOME=/gradle_home
+#    - wget https://dl.google.com/android/repository/commandlinetools-linux-6858069_latest.zip -O sdk-tools.zip
+#    - mkdir -p android-sdk/cmdline-tools
+#    - unzip sdk-tools.zip -d android-sdk/cmdline-tools/
+#    - mv android-sdk/cmdline-tools/cmdline-tools android-sdk/cmdline-tools/latest
+#    - export ANDROID_HOME=/opt/android-sdk
+#    - export PATH=${PATH}:${ANDROID_HOME}/cmdline-tools/latest/bin:${ANDROID_HOME}/platform-tools
+#    - cd /mobile-project
+#    - mkdir -p ${ANDROID_HOME}
+#    - sdkmanager --update
+#    - yes | sdkmanager --licenses
+#    - sdkmanager "platform-tools" "platforms;android-30" "build-tools;30.0.3"
+#  beforeSetup:
+#    - cd /mobile-project/mobile
+#    - export GRADLE_USER_HOME=/gradle_home
+#    - export LANG=en_US.UTF-8
+#    - export GRADLE_OPTS="-Xmx2g -XX:MaxMetaspaceSize=512m -XX:+HeapDumpOnOutOfMemoryError -Dfile.encoding=UTF-8"
+#    - gradle :app:assembleRelease
 ---
 image: loyalty
 from: docker.io/library/eclipse-temurin:17-jre-jammy
