@@ -40,8 +40,15 @@ git:
   - to: /mobile-project
     includePaths:
       - mobile/*
+    stageDependencies:
+      beforeSetup:
+        - "*"
+      install:
+        - "**/*.gradle.kts"
+        - "**/gradle.properties"
 shell:
-  setup:
+  install:
+    - export GRADLE_USER_HOME=/gradle_home
     - export ANDROID_HOME=/opt/android-sdk
     - export PATH=${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/tools/bin:${ANDROID_HOME}/platform-tools
     - cd /mobile-project
@@ -49,10 +56,12 @@ shell:
     - sdkmanager --update
     - yes | sdkmanager --licenses
     - sdkmanager "platform-tools" "platforms;android-30" "build-tools;30.0.3"
-  install:
+  beforeSetup:
     - cd /mobile-project/mobile
-    - chmod +x gradlew
-    - ./gradlew assembleRelease
+    - export GRADLE_USER_HOME=/gradle_home
+    - export LANG=en_US.UTF-8
+    - export GRADLE_OPTS="-Xmx2g -XX:MaxMetaspaceSize=512m -XX:+HeapDumpOnOutOfMemoryError -Dfile.encoding=UTF-8"
+    - gradle :app:assembleRelease
 ---
 image: loyalty
 from: docker.io/library/eclipse-temurin:17-jre-jammy
