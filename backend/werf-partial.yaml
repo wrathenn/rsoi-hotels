@@ -44,7 +44,7 @@ shell:
     - sdkmanager --update
     - yes | sdkmanager --licenses
     - sdkmanager "platform-tools" "platforms;android-30" "build-tools;30.0.3"
-  beforeInstall:
+  install:
     - cd /project/mobile/app
     - chmod +x gradlew
     - ./gradlew assembleRelease
@@ -140,7 +140,7 @@ import:
     includePaths:
       - gateway-service-*-all.jar
   - image: android-build
-    after: beforeInstall
+    after: install
     add: /project/mobile/app/build/outputs/apk/release/
     to: /app/apk
     includePaths:
