@@ -15,7 +15,7 @@ git:
         - "**/gradle.properties"
 shell:
   install:
-    - apt-get install -y apt-utils wget unzip
+    - apt-get update && apt-get install -y apt-utils wget unzip
     - cd /opt
     - wget https://dl.google.com/android/repository/commandlinetools-linux-6858069_latest.zip -O sdk-tools.zip
     - mkdir -p android-sdk/cmdline-tools
