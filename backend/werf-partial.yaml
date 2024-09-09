@@ -6,6 +6,7 @@ git:
   - to: /project
     includePaths:
       - backend/*
+      - mobile/*
     excludePaths:
       - backend/werf-partial.yaml
     stageDependencies:
