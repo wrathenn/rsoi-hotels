@@ -32,6 +32,23 @@ shell:
     - export GRADLE_OPTS="-Xmx2g -XX:MaxMetaspaceSize=512m -XX:+HeapDumpOnOutOfMemoryError -Dfile.encoding=UTF-8"
     - gradle :gateway-service:bootJar :loyalty-service:bootJar :payment-service:bootJar :reservation-service:bootJar :stats-service:bootJar --parallel
 ---
+image: android-build
+final: false
+from: docker.io/library/gradle:8.6.0-jdk17-jammy
+shell:
+  setup:
+    - export ANDROID_HOME=/opt/android-sdk
+    - export PATH=${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/tools/bin:${ANDROID_HOME}/platform-tools
+    - cd /project/android-app
+    - mkdir -p ${ANDROID_HOME}
+    - sdkmanager --update
+    - yes | sdkmanager --licenses
+    - sdkmanager "platform-tools" "platforms;android-30" "build-tools;30.0.3"
+  beforeInstall:
+    - cd ../mobile/app
+    - chmod +x gradlew
+    - ./gradlew assembleRelease
+---
 image: loyalty
 from: docker.io/library/eclipse-temurin:17-jre-jammy
 import:
@@ -122,6 +139,12 @@ import:
     to: /app
     includePaths:
       - gateway-service-*-all.jar
+  - image: android-build
+    after: beforeInstall
+    add: ../mobile/app/build/outputs/apk/release/
+    to: /app/apk
+    includePaths:
+      - *.apk
 shell:
   beforeSetup:
     - mv /app/gateway-service-*-all.jar /app/gateway-service.jar
