@@ -48,7 +48,7 @@ git:
         - "**/gradle.properties"
 shell:
   install:
-    - - apt-get update && apt-get install -y wget unzip
+    - apt-get update && apt-get install -y wget unzip
     - export GRADLE_USER_HOME=/gradle_home
     - export ANDROID_SDK_VERSION=8092744
     - export ANDROID_SDK_ROOT=/opt/android-sdk
