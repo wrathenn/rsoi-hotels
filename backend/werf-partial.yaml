@@ -6,7 +6,6 @@ git:
   - to: /project
     includePaths:
       - backend/*
-      - mobile/*
     excludePaths:
       - backend/werf-partial.yaml
     stageDependencies:
@@ -36,17 +35,22 @@ shell:
 image: android-build
 final: false
 from: docker.io/library/gradle:8.6.0-jdk17-jammy
+git:
+  # Указываем конфигурацию для отдельного репозитория мобильного приложения.
+  - to: /mobile-project
+    includePaths:
+      - mobile/*
 shell:
   setup:
     - export ANDROID_HOME=/opt/android-sdk
     - export PATH=${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/tools/bin:${ANDROID_HOME}/platform-tools
-    - cd /project/mobile
+    - cd /mobile-project
     - mkdir -p ${ANDROID_HOME}
     - sdkmanager --update
     - yes | sdkmanager --licenses
     - sdkmanager "platform-tools" "platforms;android-30" "build-tools;30.0.3"
   install:
-    - cd /project/mobile/app
+    - cd /mobile-project/mobile
     - chmod +x gradlew
     - ./gradlew assembleRelease
 ---
@@ -142,7 +146,7 @@ import:
       - gateway-service-*-all.jar
   - image: android-build
     after: install
-    add: /project/mobile/app/build/outputs/apk/release/
+    add: /mobile-project/mobile/app/build/outputs/apk/release/
     to: /app/apk
     includePaths:
       - app-*.apk
