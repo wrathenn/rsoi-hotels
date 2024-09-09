@@ -1,36 +1,36 @@
 ---
-#image: jars
-#final: false
-#from: docker.io/library/gradle:8.6.0-jdk17-jammy
-#git:
-#  - to: /project
-#    includePaths:
-#      - backend/*
-#    excludePaths:
-#      - backend/werf-partial.yaml
-#    stageDependencies:
-#      beforeSetup:
-#        - "*"
-#      install:
-#        - "**/*.gradle.kts"
-#        - "**/gradle.properties"
-#shell:
-#  install:
-#    - export GRADLE_USER_HOME=/gradle_home
-#    - cd /project/backend
-#    - export LANG=en_US.UTF-8
-#    - export GRADLE_OPTS="-Xmx2g -XX:MaxMetaspaceSize=512m -XX:+HeapDumpOnOutOfMemoryError -Dfile.encoding=UTF-8"
-#  beforeSetup:
-##    - apt-get update && apt-get install -y --no-install-recommends apt-utils
-##    - apt-get upgrade -y
-##    - apt-get install traceroute
-##    - traceroute repo.maven.apache.org
-##    - wget https://repo.maven.apache.org/maven2/org/springframework/amqp/spring-amqp/maven-metadata.xml
-#    - export GRADLE_USER_HOME=/gradle_home
-#    - cd /project/backend
-#    - export LANG=en_US.UTF-8
-#    - export GRADLE_OPTS="-Xmx2g -XX:MaxMetaspaceSize=512m -XX:+HeapDumpOnOutOfMemoryError -Dfile.encoding=UTF-8"
-#    - gradle :gateway-service:bootJar :loyalty-service:bootJar :payment-service:bootJar :reservation-service:bootJar :stats-service:bootJar --parallel
+image: jars
+final: false
+from: docker.io/library/gradle:8.6.0-jdk17-jammy
+git:
+  - to: /project
+    includePaths:
+      - backend/*
+    excludePaths:
+      - backend/werf-partial.yaml
+    stageDependencies:
+      beforeSetup:
+        - "*"
+      install:
+        - "**/*.gradle.kts"
+        - "**/gradle.properties"
+shell:
+  install:
+    - export GRADLE_USER_HOME=/gradle_home
+    - cd /project/backend
+    - export LANG=en_US.UTF-8
+    - export GRADLE_OPTS="-Xmx2g -XX:MaxMetaspaceSize=512m -XX:+HeapDumpOnOutOfMemoryError -Dfile.encoding=UTF-8"
+  beforeSetup:
+#    - apt-get update && apt-get install -y --no-install-recommends apt-utils
+#    - apt-get upgrade -y
+#    - apt-get install traceroute
+#    - traceroute repo.maven.apache.org
+#    - wget https://repo.maven.apache.org/maven2/org/springframework/amqp/spring-amqp/maven-metadata.xml
+    - export GRADLE_USER_HOME=/gradle_home
+    - cd /project/backend
+    - export LANG=en_US.UTF-8
+    - export GRADLE_OPTS="-Xmx2g -XX:MaxMetaspaceSize=512m -XX:+HeapDumpOnOutOfMemoryError -Dfile.encoding=UTF-8"
+    - gradle :gateway-service:bootJar :loyalty-service:bootJar :payment-service:bootJar :reservation-service:bootJar :stats-service:bootJar --parallel
 ---
 image: android-build
 final: false
@@ -86,143 +86,143 @@ shell:
 #    - export GRADLE_OPTS="-Xmx2g -XX:MaxMetaspaceSize=512m -XX:+HeapDumpOnOutOfMemoryError -Dfile.encoding=UTF-8"
 #    - gradle :app:assembleRelease
 ---
-#image: loyalty
-#from: docker.io/library/eclipse-temurin:17-jre-jammy
-#import:
-#  - image: jars
-#    after: install
-#    add: /project/backend/loyalty-service/build/libs/
-#    to: /app
-#    includePaths:
-#      - loyalty-service-*-all.jar
-#shell:
-#  beforeSetup:
-#    - mv /app/loyalty-service-*-all.jar /app/loyalty-service.jar
-#docker:
-#  EXPOSE: "8080"
-#  WORKDIR: "/workdir"
-#  ENTRYPOINT:
-#    - java
-#    - -jar
-#    - -Dfile.encoding=UTF-8
-#    - -Djava.awt.headless=true
-#    - -Dspring.profiles.active=prod
-#    - -XX:MaxMetaspaceSize=512m
-#    - -XX:+CrashOnOutOfMemoryError
-#    - -XX:+HeapDumpOnOutOfMemoryError
-#    - -Xmx3g
-#    - /app/loyalty-service.jar
-#---
-#image: payment
-#from: docker.io/library/eclipse-temurin:17-jre-jammy
-#import:
-#  - image: jars
-#    after: install
-#    add: /project/backend/payment-service/build/libs/
-#    to: /app
-#    includePaths:
-#      - payment-service-*-all.jar
-#shell:
-#  beforeSetup:
-#    - mv /app/payment-service-*-all.jar /app/payment-service.jar
-#docker:
-#  EXPOSE: "8080"
-#  WORKDIR: "/workdir"
-#  ENTRYPOINT:
-#    - java
-#    - -jar
-#    - -Dfile.encoding=UTF-8
-#    - -Djava.awt.headless=true
-#    - -Dspring.profiles.active=prod
-#    - -XX:MaxMetaspaceSize=512m
-#    - -XX:+CrashOnOutOfMemoryError
-#    - -XX:+HeapDumpOnOutOfMemoryError
-#    - -Xmx3g
-#    - /app/payment-service.jar
-#---
-#image: reservation
-#from: docker.io/library/eclipse-temurin:17-jre-jammy
-#import:
-#  - image: jars
-#    after: install
-#    add: /project/backend/reservation-service/build/libs/
-#    to: /app
-#    includePaths:
-#      - reservation-service-*-all.jar
-#shell:
-#  beforeSetup:
-#    - mv /app/reservation-service-*-all.jar /app/reservation-service.jar
-#docker:
-#  EXPOSE: "8080"
-#  WORKDIR: "/workdir"
-#  ENTRYPOINT:
-#    - java
-#    - -jar
-#    - -Dfile.encoding=UTF-8
-#    - -Djava.awt.headless=true
-#    - -Dspring.profiles.active=prod
-#    - -XX:MaxMetaspaceSize=512m
-#    - -XX:+CrashOnOutOfMemoryError
-#    - -XX:+HeapDumpOnOutOfMemoryError
-#    - -Xmx3g
-#    - /app/reservation-service.jar
-#---
-#image: gateway
-#from: docker.io/library/eclipse-temurin:17-jre-jammy
-#import:
-#  - image: jars
-#    after: install
-#    add: /project/backend/gateway-service/build/libs/
-#    to: /app
-#    includePaths:
-#      - gateway-service-*-all.jar
-#  - image: android-build
-#    after: install
-#    add: /mobile-project/mobile/app/build/outputs/apk/release/
-#    to: /app/apk
-#    includePaths:
-#      - app-*.apk
-#shell:
-#  beforeSetup:
-#    - mv /app/gateway-service-*-all.jar /app/gateway-service.jar
-#docker:
-#  EXPOSE: "8080"
-#  WORKDIR: "/workdir"
-#  ENTRYPOINT:
-#    - java
-#    - -jar
-#    - -Dfile.encoding=UTF-8
-#    - -Djava.awt.headless=true
-#    - -Dspring.profiles.active=prod
-#    - -XX:MaxMetaspaceSize=512m
-#    - -XX:+CrashOnOutOfMemoryError
-#    - -XX:+HeapDumpOnOutOfMemoryError
-#    - -Xmx3g
-#    - /app/gateway-service.jar
-#---
-#image: stats
-#from: docker.io/library/eclipse-temurin:17-jre-jammy
-#import:
-#  - image: jars
-#    after: install
-#    add: /project/backend/stats-service/build/libs/
-#    to: /app
-#    includePaths:
-#      - stats-service-*-all.jar
-#shell:
-#  beforeSetup:
-#    - mv /app/stats-service-*-all.jar /app/stats-service.jar
-#docker:
-#  EXPOSE: "8080"
-#  WORKDIR: "/workdir"
-#  ENTRYPOINT:
-#    - java
-#    - -jar
-#    - -Dfile.encoding=UTF-8
-#    - -Djava.awt.headless=true
-#    - -Dspring.profiles.active=prod
-#    - -XX:MaxMetaspaceSize=512m
-#    - -XX:+CrashOnOutOfMemoryError
-#    - -XX:+HeapDumpOnOutOfMemoryError
-#    - -Xmx3g
-#    - /app/stats-service.jar
+image: loyalty
+from: docker.io/library/eclipse-temurin:17-jre-jammy
+import:
+  - image: jars
+    after: install
+    add: /project/backend/loyalty-service/build/libs/
+    to: /app
+    includePaths:
+      - loyalty-service-*-all.jar
+shell:
+  beforeSetup:
+    - mv /app/loyalty-service-*-all.jar /app/loyalty-service.jar
+docker:
+  EXPOSE: "8080"
+  WORKDIR: "/workdir"
+  ENTRYPOINT:
+    - java
+    - -jar
+    - -Dfile.encoding=UTF-8
+    - -Djava.awt.headless=true
+    - -Dspring.profiles.active=prod
+    - -XX:MaxMetaspaceSize=512m
+    - -XX:+CrashOnOutOfMemoryError
+    - -XX:+HeapDumpOnOutOfMemoryError
+    - -Xmx3g
+    - /app/loyalty-service.jar
+---
+image: payment
+from: docker.io/library/eclipse-temurin:17-jre-jammy
+import:
+  - image: jars
+    after: install
+    add: /project/backend/payment-service/build/libs/
+    to: /app
+    includePaths:
+      - payment-service-*-all.jar
+shell:
+  beforeSetup:
+    - mv /app/payment-service-*-all.jar /app/payment-service.jar
+docker:
+  EXPOSE: "8080"
+  WORKDIR: "/workdir"
+  ENTRYPOINT:
+    - java
+    - -jar
+    - -Dfile.encoding=UTF-8
+    - -Djava.awt.headless=true
+    - -Dspring.profiles.active=prod
+    - -XX:MaxMetaspaceSize=512m
+    - -XX:+CrashOnOutOfMemoryError
+    - -XX:+HeapDumpOnOutOfMemoryError
+    - -Xmx3g
+    - /app/payment-service.jar
+---
+image: reservation
+from: docker.io/library/eclipse-temurin:17-jre-jammy
+import:
+  - image: jars
+    after: install
+    add: /project/backend/reservation-service/build/libs/
+    to: /app
+    includePaths:
+      - reservation-service-*-all.jar
+shell:
+  beforeSetup:
+    - mv /app/reservation-service-*-all.jar /app/reservation-service.jar
+docker:
+  EXPOSE: "8080"
+  WORKDIR: "/workdir"
+  ENTRYPOINT:
+    - java
+    - -jar
+    - -Dfile.encoding=UTF-8
+    - -Djava.awt.headless=true
+    - -Dspring.profiles.active=prod
+    - -XX:MaxMetaspaceSize=512m
+    - -XX:+CrashOnOutOfMemoryError
+    - -XX:+HeapDumpOnOutOfMemoryError
+    - -Xmx3g
+    - /app/reservation-service.jar
+---
+image: gateway
+from: docker.io/library/eclipse-temurin:17-jre-jammy
+import:
+  - image: jars
+    after: install
+    add: /project/backend/gateway-service/build/libs/
+    to: /app
+    includePaths:
+      - gateway-service-*-all.jar
+  - image: android-build
+    after: install
+    add: /mobile-project/mobile/app/build/outputs/apk/release/
+    to: /app/apk
+    includePaths:
+      - app-*.apk
+shell:
+  beforeSetup:
+    - mv /app/gateway-service-*-all.jar /app/gateway-service.jar
+docker:
+  EXPOSE: "8080"
+  WORKDIR: "/workdir"
+  ENTRYPOINT:
+    - java
+    - -jar
+    - -Dfile.encoding=UTF-8
+    - -Djava.awt.headless=true
+    - -Dspring.profiles.active=prod
+    - -XX:MaxMetaspaceSize=512m
+    - -XX:+CrashOnOutOfMemoryError
+    - -XX:+HeapDumpOnOutOfMemoryError
+    - -Xmx3g
+    - /app/gateway-service.jar
+---
+image: stats
+from: docker.io/library/eclipse-temurin:17-jre-jammy
+import:
+  - image: jars
+    after: install
+    add: /project/backend/stats-service/build/libs/
+    to: /app
+    includePaths:
+      - stats-service-*-all.jar
+shell:
+  beforeSetup:
+    - mv /app/stats-service-*-all.jar /app/stats-service.jar
+docker:
+  EXPOSE: "8080"
+  WORKDIR: "/workdir"
+  ENTRYPOINT:
+    - java
+    - -jar
+    - -Dfile.encoding=UTF-8
+    - -Djava.awt.headless=true
+    - -Dspring.profiles.active=prod
+    - -XX:MaxMetaspaceSize=512m
+    - -XX:+CrashOnOutOfMemoryError
+    - -XX:+HeapDumpOnOutOfMemoryError
+    - -Xmx3g
+    - /app/stats-service.jar
