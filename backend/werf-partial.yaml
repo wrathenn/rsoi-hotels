@@ -56,7 +56,8 @@ shell:
     - mv android-sdk/cmdline-tools/cmdline-tools android-sdk/cmdline-tools/latest
   install:
     - export ANDROID_HOME=/opt/android-sdk
-    - export PATH=${PATH}:${ANDROID_HOME}/cmdline-tools/latest/bin:${ANDROID_HOME}/platform-tools
+    - export PATH=$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/platform-tools:$PATH
+    - ls $ANDROID_HOME/cmdline-tools/latest/bin
     - yes | sdkmanager --licenses
     - sdkmanager --update
     - sdkmanager "platform-tools" "platforms;android-30" "build-tools;30.0.3"
