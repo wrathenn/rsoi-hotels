@@ -124,7 +124,7 @@ import:
       - gateway-service-*-all.jar
   - image: android-build
     after: install
-    add: /mobile-project/mobile/app/build/outputs/apk/release/
+    add: /mobile-project/mobile/app/build/outputs/apk/debug/
     to: /app/apk
     includePaths:
       - app-*.apk
