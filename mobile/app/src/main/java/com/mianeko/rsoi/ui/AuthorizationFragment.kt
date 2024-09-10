@@ -6,7 +6,9 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
@@ -19,6 +21,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.koin.android.ext.android.getKoin
+
 
 class AuthorizationFragment: Fragment(R.layout.authorization_fragment) {
 
@@ -58,6 +61,18 @@ class AuthorizationFragment: Fragment(R.layout.authorization_fragment) {
                 authenticateUser(username, password)
             } else {
                 Toast.makeText(requireContext(), "Please enter username and password", Toast.LENGTH_SHORT).show()
+            }
+        }
+        binding.loginValue.setOnFocusChangeListener { v, hasFocus ->
+            if (hasFocus) {
+                val imm = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager?
+                imm?.hideSoftInputFromWindow(v.windowToken, 0)
+            }
+        }
+        binding.passwordValue.setOnFocusChangeListener { v, hasFocus ->
+            if (hasFocus) {
+                val imm = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager?
+                imm?.hideSoftInputFromWindow(v.windowToken, 0)
             }
         }
 
