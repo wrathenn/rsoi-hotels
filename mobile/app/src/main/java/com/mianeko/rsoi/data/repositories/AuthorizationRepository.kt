@@ -1,54 +1,52 @@
 package com.mianeko.rsoi.data.repositories
 
 import android.annotation.SuppressLint
-import com.google.gson.Gson
-import com.google.gson.JsonObject
-import com.mianeko.rsoi.data.entities.KeycloakToken
-import com.migcomponents.migbase64.Base64
+import com.auth0.jwk.UrlJwkProvider
+import com.auth0.jwt.JWT
+import com.auth0.jwt.JWTVerifier
+import com.auth0.jwt.algorithms.Algorithm
+import com.auth0.jwt.interfaces.DecodedJWT
+import java.net.URI
 import java.text.SimpleDateFormat
 import java.util.Calendar
 
 
+@SuppressLint("SimpleDateFormat")
 class AuthorizationRepository {
-    fun isTokenExpired(token: KeycloakToken?): Boolean {
-        token?.apply {
-            if (tokenExpirationDate == null) return true
-            return Calendar.getInstance().after(tokenExpirationDate)
-        }
-        return true
-    }
-
-    fun isRefreshTokenExpired(token: KeycloakToken?): Boolean {
-        token?.apply {
-            if (refreshTokenExpirationDate == null) return true
-            return Calendar.getInstance().after(refreshTokenExpirationDate)
-        }
-        return true
+    private val formatter: SimpleDateFormat by lazy { SimpleDateFormat("dd/MM/yyyy HH:mm:ss") }
+    private val jwkProvider by lazy {
+        UrlJwkProvider(URI("http://hotels.rsoi.wrathen.ru/auth/realms/rsoi-hotels/protocol/openid-connect/certs").normalize().toURL())
     }
 
     @SuppressLint("SimpleDateFormat")
-    fun Calendar.formatDate(): String {
-        val formatter = SimpleDateFormat("dd/MM/yyyy HH:mm:ss")
-        return formatter.format(this.time)
+    fun formatDate(calendar: Calendar): String {
+        return formatter.format(calendar.time)
+    }
+    
+    fun fromDate(date: String): Calendar? {
+        val calendar = Calendar.getInstance()
+        return try {
+            calendar.time = formatter.parse(date) ?: return null
+            calendar
+        } catch (e: Exception) {
+            null
+        }
     }
 
-    fun parseJwtToken(jwtToken: String?): Principal {
-        jwtToken ?: return Principal()
-        jwtToken.apply {
-            val splitString = split(".")
-            val base64EncodedBody = splitString[1]
+    fun parseJwtToken(accessToken: String?): String? {
+        val jwt = JWT.decode(accessToken)
+        val jwk = jwkProvider.get(jwt.keyId) // Извлекаем JWK по keyId
 
-            val body = String(Base64.decodeFast(base64EncodedBody))
-            val jsonBody = Gson().fromJson(body, JsonObject::class.java)
+        // Создание алгоритма с использованием полученного ключа (например, RSA 256)
+        val algorithm = Algorithm.RSA256(jwk.publicKey as java.security.interfaces.RSAPublicKey, null)
 
-            val userId = jsonBody.get("sub")?.asString
-            val email = jsonBody.get("email")?.asString ?: "n/a"
-            val name = jsonBody.get("given_name")?.asString ?: "n/a"
-            val surname = jsonBody.get("family_name")?.asString ?: "n/a"
-            val roles = jsonBody.get("realm_access")?.asJsonObject?.getAsJsonArray("roles")?.map {it.asString} ?: emptyList()
+        // Верификация токена и создание JWTVerifier
+        val verifier: JWTVerifier = JWT.require(algorithm).build()
+        val decodedToken: DecodedJWT = verifier.verify(accessToken)
 
-            return Principal(userId, email, name, surname, roles)
-        }
+        // Извлечение поля name
+        val name = decodedToken.getClaim("name").asString()
+        return name
     }
 }
 

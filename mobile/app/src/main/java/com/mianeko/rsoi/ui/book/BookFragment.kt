@@ -82,6 +82,11 @@ class BookFragment: Fragment(R.layout.book_fragment) {
                 calendar.set(Calendar.MONTH, month)
                 calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
                 val startTime = dateFormat.format(calendar.time)
+                val endDate = viewModel.uiState.value.endDate
+                if (endDate != null && endDate < startTime) {
+                    Toast.makeText(context, "Дата выселения должна быть позже даты заселения", Toast.LENGTH_LONG).show()
+                    return@OnDateSetListener
+                }
                 binding.startDateValue.text = startTime
                 viewModel.setStartDate(startTime)
             }
@@ -97,6 +102,11 @@ class BookFragment: Fragment(R.layout.book_fragment) {
                 calendar.set(Calendar.MONTH, month)
                 calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
                 val endTime = dateFormat.format(calendar.time)
+                val startDate = viewModel.uiState.value.startDate
+                if (startDate != null && endTime < startDate) {
+                    Toast.makeText(context, "Дата выселения должна быть позже даты заселения", Toast.LENGTH_LONG).show()
+                    return@OnDateSetListener
+                }
                 binding.endDateValue.text = endTime
                 viewModel.setEndDate(endTime)
             }

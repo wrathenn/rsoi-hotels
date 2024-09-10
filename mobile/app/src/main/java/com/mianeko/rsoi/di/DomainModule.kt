@@ -3,6 +3,7 @@ package com.mianeko.rsoi.di
 import android.content.Context
 import android.content.SharedPreferences
 import com.mianeko.rsoi.data.mappers.ApiHotelResponseToHotelsListMapper
+import com.mianeko.rsoi.data.repositories.AuthorizationRepository
 import com.mianeko.rsoi.data.repositories.HotelsRepositoryImpl
 import com.mianeko.rsoi.data.repositories.ReservationRepositoryImpl
 import com.mianeko.rsoi.domain.hotels.GetHotelsUseCaseImpl
@@ -48,4 +49,8 @@ val domainModule = module {
     single {
         androidContext().getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
     } bind SharedPreferences::class
+    
+    single { 
+        AuthorizationRepository()
+    }
 }

@@ -59,4 +59,6 @@ dependencies {
     implementation("io.insert-koin:koin-android:3.2.0")
     implementation("com.squareup.retrofit2:converter-gson:2.11.0")
     implementation("com.brsanthu:migbase64:2.2")
+    implementation("com.auth0:java-jwt:3.18.1") // или последняя версия
+    implementation("com.auth0:jwks-rsa:0.20.0") // или последняя версия
 }

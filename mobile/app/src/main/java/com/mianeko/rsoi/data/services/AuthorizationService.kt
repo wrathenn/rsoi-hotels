@@ -26,6 +26,7 @@ interface AuthorizationService {
     suspend fun refreshAccessToken(
         @Field("refresh_token") refreshToken: String,        
         @Field("client_id")    clientId: String = "mobile-client",
+        @Field("client_secret") clientSecret: String = "5LFJbZK2HYaDkUllxjytBK8GqF4GyTLE",
         @Field("grant_type")    grantType: String = "refresh_token"
     ): Response<KeycloakToken>
 
