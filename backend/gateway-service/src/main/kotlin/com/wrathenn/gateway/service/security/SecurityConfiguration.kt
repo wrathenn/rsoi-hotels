@@ -20,6 +20,7 @@ class SecurityConfiguration(
                     AntPathRequestMatcher("/swagger-ui/**"),
                     AntPathRequestMatcher("/v3/api-docs/**"),
                     AntPathRequestMatcher("/manage/health"),
+                    AntPathRequestMatcher("/resources"),
                 ).permitAll().anyRequest().authenticated()
             }
             .oauth2ResourceServer {
