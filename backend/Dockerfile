@@ -29,5 +29,7 @@ ENV LANG en_US.UTF-8
 EXPOSE 8080
 
 COPY --from=build /home/gradle/rsoi/${PROJECT}/build/libs/${PROJECT}-*-all.jar /app/app.jar
+COPY --from=mobile-builder /output/* /opt/app/apk/
+
 #CMD tail -f /dev/null
 ENTRYPOINT ["java", "-jar", "-Djava.awt.headless=true", "-Dspring.profiles.active=prod", "/app/app.jar"]

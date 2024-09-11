@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="4dp"
+    android:layout_marginBottom="4dp"
+    android:layout_marginStart="4dp"
+    android:layout_marginEnd="4dp"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp"
+    android:paddingStart="10dp"
+    android:paddingEnd="10dp"
+    android:background="@color/primary_container">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.2"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="4dp"
+        android:orientation="vertical" >
+        
+        <TextView
+            android:id="@+id/hotel_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start|top"
+            android:textSize="14sp"
+            android:textColor="@color/on_primary_container_text"
+            tools:text="Hotel NNN"/>
+
+        <TextView
+            android:id="@+id/hotel_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start|top"
+            android:textSize="12sp"
+            android:textColor="@color/on_primary_container_text"
+            tools:text="Italy, Monaco"/>
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/star_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="4dp"
+        android:background="@drawable/ic_star"
+        android:layout_gravity="center_vertical|start" />
+
+    <TextView
+        android:id="@+id/hotel_rating"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start|center_vertical"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="4dp"
+        android:layout_weight="0.1"
+        android:textSize="14sp"
+        android:textColor="@color/on_primary_container_text"
+        tools:text="5.2"/>
+
+    <TextView
+        android:id="@+id/hotel_price"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start|center_vertical"
+        android:layout_weight="0.2"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="4dp"
+        android:textSize="14sp"
+        android:textColor="@color/on_primary_container_text"
+        tools:text="1200000 eu/day"/>
+    
+    
+    <TextView
+        android:id="@+id/book_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:paddingVertical="10dp"
+        android:paddingHorizontal="6dp"
+        android:layout_gravity="end|center_vertical"
+        android:background="@drawable/rounded_rectangle"
+        android:textColor="@color/on_primary_text"
+        android:paddingStart="2dp"
+        android:paddingEnd="2dp"
+        android:text="Выбор" />
+
+</LinearLayout>

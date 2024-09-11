@@ -1,0 +1,31 @@
+---
+image: android-build
+final: false
+from: docker.io/library/gradle:8.6.0-jdk17-jammy
+git:
+  # Указываем конфигурацию для отдельного репозитория мобильного приложения.
+  - to: /mobile-project
+    includePaths:
+      - mobile/*
+    stageDependencies:
+      beforeSetup:
+        - "*"
+      install:
+        - "**/*.gradle.kts"
+        - "**/gradle.properties"
+shell:
+  install:
+    - apt-get update && apt-get install -y apt-utils wget unzip
+    - cd /opt
+    - wget https://dl.google.com/android/repository/commandlinetools-linux-6858069_latest.zip -O sdk-tools.zip
+    - mkdir -p android-sdk/cmdline-tools
+    - unzip sdk-tools.zip -d android-sdk/cmdline-tools/
+    - mv android-sdk/cmdline-tools/cmdline-tools android-sdk/cmdline-tools/latest
+  beforeSetup:
+    - export ANDROID_HOME=/opt/android-sdk
+    - export PATH=$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/platform-tools:$PATH
+    - yes | sdkmanager --licenses
+    - sdkmanager --update
+    - sdkmanager "platform-tools" "platforms;android-30" "build-tools;30.0.3"
+    - cd /mobile-project/mobile
+    - gradle :rsoi-app:assembleDebug

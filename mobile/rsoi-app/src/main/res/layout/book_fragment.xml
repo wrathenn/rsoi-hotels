@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <TextView
+        android:id="@+id/booking"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="22sp"
+        android:textColor="@color/on_primary_text"
+        android:layout_gravity="top"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="4dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:text="Новое бронирование"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/rounded_rectangle" />
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/booking"
+        app:layout_constraintEnd_toEndOf="@id/booking"
+        app:layout_constraintTop_toBottomOf="@id/booking"
+        android:foregroundGravity="top|left"
+        android:layout_gravity="top|start"
+        android:gravity="start"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="4dp"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:text="Hotel"
+        android:textColor="@color/on_surface_text"
+        android:textSize="20sp"
+        />
+    
+    
+
+<!--    <EditText-->
+<!--        android:id="@+id/login_value"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:layout_constraintStart_toEndOf="@id/login_text"-->
+<!--        app:layout_constraintEnd_toEndOf="@id/authorization"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/authorization"-->
+<!--        app:layout_constraintBottom_toTopOf="@id/sign_in_btn"-->
+<!--        android:foregroundGravity="right"-->
+<!--        android:layout_gravity="end"-->
+<!--        app:layout_constraintWidth_percent="0.4" />-->
+
+    <TextView
+        android:id="@+id/address_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/name"
+        app:layout_constraintEnd_toStartOf="@id/address_value"
+        app:layout_constraintTop_toBottomOf="@id/name"
+        android:foregroundGravity="bottom|left"
+        android:layout_gravity="bottom|start"
+        android:layout_marginTop="10dp"
+        app:layout_constraintHorizontal_weight="0.3"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        android:layout_marginStart="4dp"
+        android:textColor="@color/on_surface_text"
+        android:text="Адрес:"
+        android:textSize="18sp"
+        />
+
+    <TextView
+        android:id="@+id/address_value"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/address_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/name"
+        android:foregroundGravity="right"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/on_surface_text"
+        android:textSize="18sp"
+        android:layout_gravity="end"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintHorizontal_weight="0.8"
+        android:maxLines="5"
+        tools:text="Россия, Москва, 2-я Бауманская улица, 5с1" />
+
+
+    <TextView
+        android:id="@+id/price_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/name"
+        app:layout_constraintEnd_toStartOf="@id/price_value"
+        app:layout_constraintTop_toBottomOf="@id/address_value"
+        android:foregroundGravity="bottom|left"
+        android:layout_gravity="bottom|start"
+        android:layout_marginTop="10dp"
+        app:layout_constraintHorizontal_weight="0.3"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        android:layout_marginStart="4dp"
+        android:textColor="@color/on_surface_text"
+        android:text="Цена:"
+        android:textSize="18sp"
+        />
+
+    <TextView
+        android:id="@+id/price_value"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/price_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/address_value"
+        android:foregroundGravity="right"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/on_surface_text"
+        android:textSize="18sp"
+        android:layout_gravity="end"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintHorizontal_weight="0.8"
+        android:maxLines="1"
+        tools:text="3000 р/сут" />
+
+    <TextView
+        android:id="@+id/stars_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/name"
+        app:layout_constraintEnd_toStartOf="@id/stars_value"
+        app:layout_constraintTop_toBottomOf="@id/price_value"
+        android:foregroundGravity="bottom|left"
+        android:layout_gravity="bottom|start"
+        android:layout_marginTop="10dp"
+        app:layout_constraintHorizontal_weight="0.3"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        android:layout_marginStart="4dp"
+        android:textColor="@color/on_surface_text"
+        android:text="Рейтинг:"
+        android:textSize="18sp"
+        />
+
+    <TextView
+        android:id="@+id/stars_value"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/stars_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/price_value"
+        android:foregroundGravity="right"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/on_surface_text"
+        android:textSize="18sp"
+        android:layout_gravity="end"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintHorizontal_weight="0.8"
+        android:maxLines="1"
+        tools:text="5 звезд" />
+
+
+    <TextView
+        android:id="@+id/start_date_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/name"
+        app:layout_constraintEnd_toStartOf="@id/start_date_value"
+        app:layout_constraintTop_toBottomOf="@id/stars_value"
+        app:layout_constraintBottom_toBottomOf="@id/start_date_value"
+        android:foregroundGravity="bottom|left"
+        android:layout_gravity="bottom|start"
+        android:layout_marginTop="10dp"
+        app:layout_constraintHorizontal_weight="0.3"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        android:layout_marginStart="4dp"
+        android:textColor="@color/on_surface_text"
+        android:text="Заезд:"
+        android:textSize="18sp"
+        />
+
+    <TextView
+        android:id="@+id/start_date_value"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/start_date_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/stars_value"
+        android:foregroundGravity="right"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="30dp"
+        android:padding="8dp"
+        android:textColor="@color/on_surface_text"
+        android:textSize="18sp"
+        android:text="mm/dd/yyyy"
+        android:background="@drawable/rounded_corner"
+        android:layout_gravity="end"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintHorizontal_weight="0.8"
+        app:layout_constraintHorizontal_bias="0.1"
+        android:maxLines="1" />
+
+
+
+    <TextView
+        android:id="@+id/end_date_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/name"
+        app:layout_constraintEnd_toStartOf="@id/end_date_value"
+        app:layout_constraintTop_toBottomOf="@id/start_date_value"
+        app:layout_constraintBottom_toBottomOf="@id/end_date_value"
+        android:foregroundGravity="bottom|left"
+        android:layout_gravity="bottom|start"
+        android:layout_marginTop="10dp"
+        app:layout_constraintHorizontal_weight="0.3"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        android:layout_marginStart="4dp"
+        android:textColor="@color/on_surface_text"
+        android:text="Выезд:"
+        android:textSize="18sp"
+        />
+
+    <TextView
+        android:id="@+id/end_date_value"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/end_date_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/start_date_value"
+        android:foregroundGravity="right"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="30dp"
+        android:padding="8dp"
+        android:textColor="@color/on_surface_text"
+        android:textSize="18sp"
+        android:text="mm/dd/yyyy"
+        android:background="@drawable/rounded_corner"
+        android:layout_gravity="end"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintHorizontal_weight="0.8"
+        app:layout_constraintHorizontal_bias="0.1"
+        android:maxLines="1" />
+
+
+<!--    <TextView-->
+<!--        android:id="@+id/cost_text"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:layout_constraintStart_toStartOf="@id/name"-->
+<!--        app:layout_constraintEnd_toStartOf="@id/cost_value"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/end_date_value"-->
+<!--        android:foregroundGravity="bottom|left"-->
+<!--        android:layout_gravity="bottom|start"-->
+<!--        android:layout_marginTop="10dp"-->
+<!--        app:layout_constraintHorizontal_weight="0.3"-->
+<!--        app:layout_constraintHorizontal_chainStyle="packed"-->
+<!--        android:layout_marginStart="4dp"-->
+<!--        android:textColor="@color/on_surface_text"-->
+<!--        android:text="Стоимость:"-->
+<!--        android:textSize="18sp"-->
+<!--        />-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/cost_value"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:layout_constraintStart_toEndOf="@id/cost_text"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/end_date_value"-->
+<!--        android:foregroundGravity="right"-->
+<!--        android:layout_marginTop="10dp"-->
+<!--        android:textColor="@color/on_surface_text"-->
+<!--        android:textSize="18sp"-->
+<!--        android:layout_gravity="end"-->
+<!--        app:layout_constraintHorizontal_chainStyle="spread_inside"-->
+<!--        app:layout_constraintHorizontal_weight="0.8"-->
+<!--        android:maxLines="1"-->
+<!--        tools:text="15000 рублей" />-->
+<!--    -->
+    <TextView
+        android:id="@+id/book_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_rectangle"
+        android:textColor="@color/on_primary_text"
+        android:textSize="16sp"
+        android:enabled="false"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="4dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginEnd="2dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:gravity="bottom"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/end_date_value"
+        android:text="Забронировать" />
+    
+    <ProgressBar
+        android:id="@+id/progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/book_btn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="20dp"
+        android:visibility="gone" />
+    
+    <TextView
+        android:id="@+id/reservation_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/book_btn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="20dp"
+        android:visibility="gone" />
+
+
+    <include layout="@layout/nav_bar_layout" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
