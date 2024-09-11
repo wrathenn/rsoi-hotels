@@ -28,4 +28,4 @@ shell:
     - sdkmanager --update
     - sdkmanager "platform-tools" "platforms;android-30" "build-tools;30.0.3"
     - cd /mobile-project/mobile
-    - gradle :app:assembleDebug
+    - gradle :rsoi-app:assembleDebug
