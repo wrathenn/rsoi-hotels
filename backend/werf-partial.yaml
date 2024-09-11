@@ -124,10 +124,10 @@ import:
       - gateway-service-*-all.jar
   - image: android-build
     after: install
-    add: /mobile-project/mobile/app/build/outputs/apk/debug/
+    add: /mobile-project/mobile/rsoi-app/build/outputs/apk/debug/
     to: /app/apk
     includePaths:
-      - app-*.apk
+      - rsoi-app-*.apk
 shell:
   beforeSetup:
     - mv /app/gateway-service-*-all.jar /app/gateway-service.jar
