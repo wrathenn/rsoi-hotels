@@ -35,16 +35,13 @@ class AuthorizationRepository {
 
     fun parseJwtToken(accessToken: String?): String? {
         val jwt = JWT.decode(accessToken)
-        val jwk = jwkProvider.get(jwt.keyId) // Извлекаем JWK по keyId
+        val jwk = jwkProvider.get(jwt.keyId)
 
-        // Создание алгоритма с использованием полученного ключа (например, RSA 256)
         val algorithm = Algorithm.RSA256(jwk.publicKey as java.security.interfaces.RSAPublicKey, null)
 
-        // Верификация токена и создание JWTVerifier
         val verifier: JWTVerifier = JWT.require(algorithm).build()
         val decodedToken: DecodedJWT = verifier.verify(accessToken)
 
-        // Извлечение поля name
         val name = decodedToken.getClaim("name").asString()
         return name
     }

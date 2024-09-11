@@ -9,6 +9,7 @@ import com.mianeko.rsoi.ui.loyalty.LoyaltyFragment
 import com.mianeko.rsoi.ui.navigation.HotelsNavAdapter
 import com.mianeko.rsoi.ui.navigation.HotelsNavAdapterImpl
 import com.mianeko.rsoi.ui.reservations.ReservationsFragment
+import com.mianeko.rsoi.R
 
 class MainActivity : FragmentActivity(R.layout.fragment_container) {
     

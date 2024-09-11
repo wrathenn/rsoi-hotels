@@ -14,5 +14,5 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "Rsoi Hotels"
-include(":app")
+include(":rsoi-app")
  
