@@ -16,7 +16,7 @@ import java.io.File
 class ResourcesController {
     @GetMapping
     fun downloadApk(): ResponseEntity<InputStreamResource> {
-        val apkFile = File("/app/apk/app-debug.apk")
+        val apkFile = File("/app/apk/rsoi-app-debug.apk")
 
         if (!apkFile.exists()) {
             return ResponseEntity.notFound().build()
